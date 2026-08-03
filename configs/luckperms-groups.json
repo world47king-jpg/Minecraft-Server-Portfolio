@@ -1,0 +1,71 @@
+{
+  "groups": {
+    "default": {
+      "permissions": [
+        "essentials.spawn",
+        "essentials.sethome",
+        "essentials.home",
+        "essentials.tpa",
+        "essentials.warp",
+        "essentials.fly",
+        "essentials.heal",
+        "essentials.feed",
+        "essentials.kit.starter"
+      ],
+      "meta": {
+        "weight": "0",
+        "prefix": "&7[Member] "
+      }
+    },
+    "vip": {
+      "permissions": [
+        "essentials.fly",
+        "essentials.vanish",
+        "essentials.kit.vip",
+        "essentials.kit.vipdaily",
+        "essentials.warps.vip"
+      ],
+      "meta": {
+        "weight": "100",
+        "prefix": "&b[VIP] "
+      },
+      "inheritance": ["default"]
+    },
+    "moderator": {
+      "permissions": [
+        "essentials.ban",
+        "essentials.unban",
+        "essentials.kick",
+        "essentials.mute",
+        "essentials.gamemode",
+        "essentials.vanish",
+        "essentials.tp",
+        "essentials.tphere",
+        "worldedit.selection.*",
+        "coreprotect.inspect",
+        "coreprotect.rollback"
+      ],
+      "meta": {
+        "weight": "200",
+        "prefix": "&c[Mod] "
+      },
+      "inheritance": ["default"]
+    },
+    "admin": {
+      "permissions": ["*"],
+      "meta": {
+        "weight": "300",
+        "prefix": "&4[Admin] "
+      },
+      "inheritance": ["moderator"]
+    },
+    "owner": {
+      "permissions": ["*", "luckperms.*"],
+      "meta": {
+        "weight": "400",
+        "prefix": "&6[Owner] "
+      },
+      "inheritance": ["admin"]
+    }
+  }
+}
