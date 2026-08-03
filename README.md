@@ -9,6 +9,7 @@
 - Anti-xray setup
 - Entity optimization
 - WorldGuard region protection
+- **Java plugin development** (Bukkit/Spigot API)
 
 ## Tools Created
 
@@ -20,12 +21,21 @@ Python CLI tool for automated server setup:
 - Optimizes server for better performance
 - Paper config generation (paper-global.yml)
 
+### TestPlugin (Java)
+Simple Minecraft plugin demonstrating:
+- Command registration and execution
+- Player interaction handling
+- Server information display
+- Permission system integration
+- Proper plugin structure (plugin.yml, main class, command classes)
+
 ## Services
 - Server setup and configuration
 - Performance optimization
 - Plugin installation and setup
 - Permissions management
 - Server troubleshooting
+- **Custom plugin development**
 
 ## Contact
 - Discord: underworld_4
