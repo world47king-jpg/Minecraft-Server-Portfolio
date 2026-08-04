@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jay | Web Developer & Minecraft Server Specialist</title>
-<link rel="icon" type="image/png" href="jay_logo.png">
+<link rel="icon" type="image/svg+xml" href="jay_logo.svg">
 <style>
 :root {
   --bg-primary: #0a0e17;
@@ -51,7 +51,8 @@ nav {
 }
 nav.scrolled { padding: 0.5rem 2rem; background: rgba(10, 14, 23, 0.95); }
 .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { font-size: 1.5rem; font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+.nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+.nav-logo img { height: 32px; width: 32px; }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a {
   color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
@@ -219,7 +220,8 @@ footer {
   padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--border-color);
 }
 .footer-content { max-width: 1200px; margin: 0 auto; }
-.footer-logo { font-size: 1.5rem; font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.footer-logo { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.footer-logo img { height: 32px; width: 32px; }
 .footer-links { display: flex; gap: 2rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
 .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; }
 .footer-links a:hover { color: var(--accent-cyan); }
@@ -251,7 +253,7 @@ footer {
 </div>
 <nav id="navbar">
   <div class="nav-container">
-    <div class="nav-logo">JAY</div>
+    <div class="nav-logo"><img src="jay_logo.svg" alt="JAY"> JAY</div>
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -434,7 +436,7 @@ footer {
 </section>
 <footer>
   <div class="footer-content">
-    <div class="footer-logo">JAY</div>
+    <div class="footer-logo"><img src="jay_logo.svg" alt="JAY"> JAY</div>
     <div class="footer-links">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
