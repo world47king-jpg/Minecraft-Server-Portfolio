@@ -1,1 +1,402 @@
-__OPENFILE__C:\Users\unkno\Downloads\try to hack something\portfolio-demos\ecommerce\index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURUM - Premium Audio</title>
+<style>
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #1a1a1a;
+  --bg-hover: #222222;
+  --gold: #d4af37;
+  --gold-light: #f0d060;
+  --gold-dark: #b8960c;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  --border: #2a2a2a;
+  --border-light: #333333;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary); color: var(--text-primary);
+  line-height: 1.6;
+}
+.navbar {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); padding: 0 2rem;
+}
+.nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.nav-logo { font-size: 1.5rem; font-weight: 800; letter-spacing: 3px; color: var(--gold); }
+.nav-search { flex: 1; max-width: 400px; margin: 0 2rem; position: relative; }
+.nav-search input {
+  width: 100%; padding: 0.7rem 1rem 0.7rem 2.5rem; background: var(--bg-card);
+  border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary);
+  font-size: 0.9rem; outline: none; transition: border-color 0.3s;
+}
+.nav-search input:focus { border-color: var(--gold); }
+.nav-search::before { content: '\1F50D'; position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 0.85rem; }
+.nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+.nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-link:hover { color: var(--gold); }
+.cart-btn {
+  position: relative; background: none; border: none; color: var(--text-primary);
+  font-size: 1.3rem; cursor: pointer; padding: 0.5rem;
+}
+.cart-badge {
+  position: absolute; top: -2px; right: -2px; width: 18px; height: 18px;
+  background: var(--gold); color: var(--bg-primary); border-radius: 50%;
+  font-size: 0.7rem; font-weight: 700; display: flex;
+  align-items: center; justify-content: center;
+}
+.product-section { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.product-gallery { position: relative; }
+.product-main-image {
+  width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  font-size: 8rem; position: relative; overflow: hidden; cursor: zoom-in;
+  border: 1px solid var(--border);
+}
+.product-main-image::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.product-main-image:hover::after { opacity: 1; }
+.product-thumbnails { display: flex; gap: 1rem; margin-top: 1rem; }
+.thumbnail {
+  width: 80px; height: 80px; border-radius: 10px; cursor: pointer;
+  border: 2px solid transparent; transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center; font-size: 2rem;
+}
+.thumbnail.active, .thumbnail:hover { border-color: var(--gold); }
+.thumbnail-1 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.thumbnail-2 { background: linear-gradient(135deg, #2d1b4e, #1a1a2e); }
+.thumbnail-3 { background: linear-gradient(135deg, #1a2e1a, #16213e); }
+.thumbnail-4 { background: linear-gradient(135deg, #2e1a1a, #213e16); }
+.product-info { padding: 1rem 0; }
+.product-brand { color: var(--gold); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+.product-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+.product-rating { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+.stars { color: var(--gold); font-size: 1.1rem; }
+.rating-text { color: var(--text-secondary); font-size: 0.9rem; }
+.product-price { font-size: 2.5rem; font-weight: 800; color: var(--gold); margin-bottom: 2rem; }
+.product-price .original { font-size: 1.2rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.75rem; font-weight: 400; }
+.product-desc { color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8; }
+.option-group { margin-bottom: 1.5rem; }
+.option-label { font-weight: 600; margin-bottom: 0.75rem; display: block; }
+.color-options { display: flex; gap: 0.75rem; }
+.color-circle {
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  border: 3px solid transparent; transition: all 0.3s; position: relative;
+}
+.color-circle.active { border-color: var(--gold); }
+.color-circle::after {
+  content: '\2713'; position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center; color: white;
+  font-weight: 700; opacity: 0; transition: opacity 0.3s;
+}
+.color-circle.active::after { opacity: 1; }
+.color-black { background: #1a1a1a; }
+.color-white { background: #f0f0f0; }
+.color-blue { background: #1e3a5f; }
+.color-gold { background: var(--gold); }
+.size-options { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.size-btn {
+  padding: 0.6rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-primary); cursor: pointer;
+  font-weight: 500; transition: all 0.3s;
+}
+.size-btn.active, .size-btn:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+.quantity-selector { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.qty-btn {
+  width: 40px; height: 40px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-primary); font-size: 1.2rem;
+  cursor: pointer; transition: all 0.3s; display: flex;
+  align-items: center; justify-content: center;
+}
+.qty-btn:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+.qty-value { font-size: 1.2rem; font-weight: 600; min-width: 40px; text-align: center; }
+.add-to-cart {
+  width: 100%; padding: 1.2rem; background: var(--gold); color: var(--bg-primary);
+  border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.add-to-cart:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
+.add-to-cart:active { transform: translateY(0); }
+.ripple {
+  position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.4);
+  transform: scale(0); animation: rippleEffect 0.6s linear;
+}
+@keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+.tabs-section { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; }
+.tab-buttons { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+.tab-btn {
+  padding: 1rem 2rem; background: none; border: none; color: var(--text-muted);
+  font-weight: 600; cursor: pointer; transition: all 0.3s; position: relative; font-size: 1rem;
+}
+.tab-btn.active { color: var(--gold); }
+.tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--gold); }
+.tab-content { display: none; animation: fadeIn 0.3s; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table tr { border-bottom: 1px solid var(--border); }
+.spec-table td { padding: 1rem; }
+.spec-table td:first-child { color: var(--text-muted); width: 200px; }
+.spec-table td:last-child { font-weight: 500; }
+.review-summary { display: flex; gap: 3rem; margin-bottom: 2rem; align-items: center; }
+.review-average { text-align: center; }
+.review-number { font-size: 3rem; font-weight: 800; color: var(--gold); }
+.review-stars { color: var(--gold); margin: 0.5rem 0; }
+.review-count { color: var(--text-muted); font-size: 0.9rem; }
+.rating-bars { flex: 1; }
+.rating-bar-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+.rating-bar-label { min-width: 30px; text-align: right; color: var(--text-secondary); }
+.rating-bar-track { flex: 1; height: 8px; background: var(--bg-card); border-radius: 4px; overflow: hidden; }
+.rating-bar-fill { height: 100%; background: var(--gold); border-radius: 4px; }
+.rating-bar-count { min-width: 30px; color: var(--text-muted); font-size: 0.85rem; }
+.review-card { padding: 1.5rem; background: var(--bg-card); border-radius: 12px; margin-bottom: 1rem; border: 1px solid var(--border); }
+.review-header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; }
+.review-author { font-weight: 600; }
+.review-date { color: var(--text-muted); font-size: 0.85rem; }
+.review-text { color: var(--text-secondary); line-height: 1.7; }
+.related-section { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+.section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 2rem; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.product-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; transition: all 0.3s; cursor: pointer;
+}
+.product-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+.product-card-image {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; position: relative;
+}
+.product-card-image .badge {
+  position: absolute; top: 1rem; left: 1rem; padding: 0.3rem 0.8rem;
+  background: var(--gold); color: var(--bg-primary); border-radius: 6px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.product-card-body { padding: 1.25rem; }
+.product-card-title { font-weight: 700; margin-bottom: 0.5rem; }
+.product-card-price { color: var(--gold); font-weight: 700; font-size: 1.1rem; }
+.product-card-rating { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+.cart-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: 2000;
+  opacity: 0; visibility: hidden; transition: all 0.3s;
+}
+.cart-overlay.active { opacity: 1; visibility: visible; }
+.cart-sidebar {
+  position: fixed; top: 0; right: -420px; width: 400px; height: 100vh;
+  background: var(--bg-secondary); z-index: 2001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column; border-left: 1px solid var(--border);
+}
+.cart-sidebar.active { right: 0; }
+.cart-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cart-title { font-size: 1.3rem; font-weight: 700; }
+.cart-close { background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+.cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; }
+.cart-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.cart-item-image {
+  width: 70px; height: 70px; background: var(--bg-card); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;
+}
+.cart-item-info { flex: 1; }
+.cart-item-name { font-weight: 600; margin-bottom: 0.25rem; }
+.cart-item-price { color: var(--gold); font-weight: 600; }
+.cart-item-qty { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+.cart-item-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; transition: color 0.3s; }
+.cart-item-remove:hover { color: #f85149; }
+.cart-footer { padding: 1.5rem; border-top: 1px solid var(--border); }
+.cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+.cart-total span:last-child { color: var(--gold); }
+.checkout-btn {
+  width: 100%; padding: 1rem; background: var(--gold); color: var(--bg-primary);
+  border: none; border-radius: 10px; font-weight: 700; font-size: 1rem;
+  cursor: pointer; transition: all 0.3s;
+}
+.checkout-btn:hover { background: var(--gold-light); }
+@media (max-width: 900px) {
+  .product-section { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-search { display: none; }
+  .cart-sidebar { width: 100%; right: -100%; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">AURUM</div>
+    <div class="nav-search"><input type="text" placeholder="Search products..."></div>
+    <div class="nav-actions">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Shop</a>
+      <a href="#" class="nav-link">About</a>
+      <button class="cart-btn" onclick="toggleCart()">&#x1F6D2;<span class="cart-badge" id="cartBadge">2</span></button>
+    </div>
+  </div>
+</nav>
+<section class="product-section">
+  <div class="product-gallery">
+    <div class="product-main-image" id="mainImage" onmousemove="handleZoom(event)">&#x1F3A7;</div>
+    <div class="product-thumbnails">
+      <div class="thumbnail thumbnail-1 active" onclick="selectThumb(this, '&#x1F3A7;')">&#x1F3A7;</div>
+      <div class="thumbnail thumbnail-2" onclick="selectThumb(this, '&#x1F3B5;')">&#x1F3B5;</div>
+      <div class="thumbnail thumbnail-3" onclick="selectThumb(this, '&#x1F4E6;')">&#x1F4E6;</div>
+      <div class="thumbnail thumbnail-4" onclick="selectThumb(this, '&#x1F3A4;')">&#x1F3A4;</div>
+    </div>
+  </div>
+  <div class="product-info">
+    <div class="product-brand">AURUM AUDIO</div>
+    <h1 class="product-title">Pro Wireless Headphones</h1>
+    <div class="product-rating">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="rating-text">4.8/5 (2,847 reviews)</span>
+    </div>
+    <div class="product-price">$299.99 <span class="original">$399.99</span></div>
+    <p class="product-desc">Experience crystal-clear audio with our flagship wireless headphones. Featuring active noise cancellation, 40-hour battery life, and premium comfort for all-day listening.</p>
+    <div class="option-group">
+      <label class="option-label">Color</label>
+      <div class="color-options">
+        <div class="color-circle color-black active" onclick="selectColor(this)"></div>
+        <div class="color-circle color-white" onclick="selectColor(this)"></div>
+        <div class="color-circle color-blue" onclick="selectColor(this)"></div>
+        <div class="color-circle color-gold" onclick="selectColor(this)"></div>
+      </div>
+    </div>
+    <div class="option-group">
+      <label class="option-label">Size</label>
+      <div class="size-options">
+        <button class="size-btn" onclick="selectSize(this)">Small</button>
+        <button class="size-btn active" onclick="selectSize(this)">Medium</button>
+        <button class="size-btn" onclick="selectSize(this)">Large</button>
+      </div>
+    </div>
+    <div class="option-group">
+      <label class="option-label">Quantity</label>
+      <div class="quantity-selector">
+        <button class="qty-btn" onclick="changeQty(-1)">&#8722;</button>
+        <span class="qty-value" id="qtyValue">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+    <button class="add-to-cart" onclick="addToCart(event)">Add to Cart &#8212; $299.99</button>
+  </div>
+</section>
+<section class="tabs-section">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab('description', this)">Description</button>
+    <button class="tab-btn" onclick="switchTab('specifications', this)">Specifications</button>
+    <button class="tab-btn" onclick="switchTab('reviews', this)">Reviews (2,847)</button>
+  </div>
+  <div class="tab-content active" id="tab-description">
+    <p style="color: var(--text-secondary); line-height: 1.8; max-width: 800px;">
+      Immerse yourself in premium audio quality with the AURUM Pro Wireless Headphones. Engineered with 40mm custom drivers delivering rich, detailed sound across the entire frequency range. The advanced Active Noise Cancellation technology blocks out ambient noise, letting you focus on what matters &#8212; your music.
+    </p><br>
+    <p style="color: var(--text-secondary); line-height: 1.8; max-width: 800px;">
+      With up to 40 hours of battery life on a single charge, these headphones keep up with your lifestyle. Quick charge gives you 5 hours of playback from just 10 minutes of charging. The premium memory foam ear cushions provide exceptional comfort for extended listening sessions.
+    </p>
+  </div>
+  <div class="tab-content" id="tab-specifications">
+    <table class="spec-table">
+      <tr><td>Driver Size</td><td>40mm Custom Dynamic</td></tr>
+      <tr><td>Frequency Response</td><td>4Hz - 40,000Hz</td></tr>
+      <tr><td>Impedance</td><td>32 Ohm</td></tr>
+      <tr><td>Battery Life</td><td>Up to 40 hours (ANC on)</td></tr>
+      <tr><td>Charging Time</td><td>2 hours (Full), 10 min (5 hrs)</td></tr>
+      <tr><td>Bluetooth</td><td>5.3 with Multipoint</td></tr>
+      <tr><td>Weight</td><td>254g</td></tr>
+      <tr><td>ANC</td><td>Hybrid Active Noise Cancellation</td></tr>
+      <tr><td>Codecs</td><td>SBC, AAC, LDAC, aptX HD</td></tr>
+      <tr><td>Water Resistance</td><td>IPX4</td></tr>
+    </table>
+  </div>
+  <div class="tab-content" id="tab-reviews">
+    <div class="review-summary">
+      <div class="review-average">
+        <div class="review-number">4.8</div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-count">2,847 reviews</div>
+      </div>
+      <div class="rating-bars">
+        <div class="rating-bar-row"><span class="rating-bar-label">5&#9733;</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:78%"></div></div><span class="rating-bar-count">78%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-label">4&#9733;</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:15%"></div></div><span class="rating-bar-count">15%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-label">3&#9733;</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:4%"></div></div><span class="rating-bar-count">4%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-label">2&#9733;</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:2%"></div></div><span class="rating-bar-count">2%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-label">1&#9733;</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:1%"></div></div><span class="rating-bar-count">1%</span></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-header"><span class="review-author">AudioPhile_Mike</span><span class="review-date">2 days ago</span></div>
+      <div class="review-stars" style="margin-bottom: 0.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">Absolutely blown away by the sound quality. The noise cancellation is incredible &#8212; I can't hear anything on the subway. Worth every penny!</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header"><span class="review-author">TechReviewSarah</span><span class="review-date">1 week ago</span></div>
+      <div class="review-stars" style="margin-bottom: 0.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">Best headphones I've ever owned. The battery life is insane, and they're so comfortable I forget I'm wearing them. Highly recommend!</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header"><span class="review-author">MusicLover_22</span><span class="review-date">2 weeks ago</span></div>
+      <div class="review-stars" style="margin-bottom: 0.5rem;">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+      <div class="review-text">Great headphones overall. Sound is fantastic, ANC works well. Only minor complaint is the case could be a bit more compact.</div>
+    </div>
+  </div>
+</section>
+<section class="related-section">
+  <h2 class="section-title">You May Also Like</h2>
+  <div class="related-grid">
+    <div class="product-card">
+      <div class="product-card-image" style="background: linear-gradient(135deg, #1a1a2e, #2d1b4e);">&#x1F50A;<span class="badge">NEW</span></div>
+      <div class="product-card-body"><div class="product-card-title">AURUM Portable Speaker</div><div class="product-card-price">$149.99</div><div class="product-card-rating">&#9733;&#9733;&#9733;&#9733;&#9733; (1,204)</div></div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-image" style="background: linear-gradient(135deg, #1a2e1a, #16213e);">&#x1F3B5;</div>
+      <div class="product-card-body"><div class="product-card-title">Wireless Earbuds Pro</div><div class="product-card-price">$179.99</div><div class="product-card-rating">&#9733;&#9733;&#9733;&#9733;&#9733; (3,567)</div></div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-image" style="background: linear-gradient(135deg, #2e1a1a, #213e16);">&#x1F3A4;</div>
+      <div class="product-card-body"><div class="product-card-title">Studio Microphone</div><div class="product-card-price">$249.99</div><div class="product-card-rating">&#9733;&#9733;&#9733;&#9733;&#9734; (892)</div></div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-image" style="background: linear-gradient(135deg, #1a1a2e, #0a2e2e);">&#x1F3A7;</div>
+      <div class="product-card-body"><div class="product-card-title">Gaming Headset</div><div class="product-card-price">$199.99</div><div class="product-card-rating">&#9733;&#9733;&#9733;&#9733;&#9733; (2,103)</div></div>
+    </div>
+  </div>
+</section>
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header"><div class="cart-title">Shopping Cart</div><button class="cart-close" onclick="toggleCart()">&#10005;</button></div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-item"><div class="cart-item-image">&#x1F3A7;</div><div class="cart-item-info"><div class="cart-item-name">Pro Wireless Headphones</div><div class="cart-item-price">$299.99</div><div class="cart-item-qty">Qty: 1</div></div><button class="cart-item-remove" onclick="removeItem(this)">&#10005;</button></div>
+    <div class="cart-item"><div class="cart-item-image">&#x1F50A;</div><div class="cart-item-info"><div class="cart-item-name">Portable Speaker</div><div class="cart-item-price">$149.99</div><div class="cart-item-qty">Qty: 1</div></div><button class="cart-item-remove" onclick="removeItem(this)">&#10005;</button></div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$449.98</span></div>
+    <button class="checkout-btn" onclick="alert('Proceeding to checkout... (Demo)')">Checkout</button>
+  </div>
+</div>
+<script>
+let cartCount = 2;
+function toggleCart(){document.getElementById('cartOverlay').classList.toggle('active');document.getElementById('cartSidebar').classList.toggle('active');}
+function removeItem(btn){btn.closest('.cart-item').remove();cartCount--;document.getElementById('cartBadge').textContent=cartCount;updateTotal();}
+function updateTotal(){let t=0;document.querySelectorAll('.cart-item-price').forEach(p=>{t+=parseFloat(p.textContent.replace('$',''));});document.getElementById('cartTotal').textContent='$'+t.toFixed(2);}
+let quantity=1;
+function changeQty(d){quantity=Math.max(1,quantity+d);document.getElementById('qtyValue').textContent=quantity;document.querySelector('.add-to-cart').textContent='Add to Cart &#8212; $'+(299.99*quantity).toFixed(2);}
+function selectColor(el){document.querySelectorAll('.color-circle').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+function selectSize(el){document.querySelectorAll('.size-btn').forEach(s=>s.classList.remove('active'));el.classList.add('active');}
+function selectThumb(el,emoji){document.querySelectorAll('.thumbnail').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('mainImage').textContent=emoji;}
+function handleZoom(e){const r=e.target.getBoundingClientRect();const x=((e.clientX-r.left)/r.width)*100;const y=((e.clientY-r.top)/r.height)*100;e.target.style.setProperty('--mouse-x',x+'%');e.target.style.setProperty('--mouse-y',y+'%');}
+function switchTab(tabId,btn){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+tabId).classList.add('active');btn.classList.add('active');}
+document.querySelector('.add-to-cart').addEventListener('click',function(e){const r=this.getBoundingClientRect();const ripple=document.createElement('span');ripple.className='ripple';ripple.style.left=(e.clientX-r.left)+'px';ripple.style.top=(e.clientY-r.top)+'px';this.appendChild(ripple);setTimeout(()=>ripple.remove(),600);});
+function addToCart(e){cartCount++;document.getElementById('cartBadge').textContent=cartCount;const ci=document.getElementById('cartItems');const n=document.createElement('div');n.className='cart-item';n.innerHTML='<div class="cart-item-image">&#x1F3A7;</div><div class="cart-item-info"><div class="cart-item-name">Pro Wireless Headphones</div><div class="cart-item-price">$'+(299.99*quantity).toFixed(2)+'</div><div class="cart-item-qty">Qty: '+quantity+'</div></div><button class="cart-item-remove" onclick="removeItem(this)">&#10005;</button>';ci.appendChild(n);updateTotal();}
+</script>
+</body>
+</html>
