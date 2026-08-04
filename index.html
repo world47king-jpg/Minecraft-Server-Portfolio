@@ -30,17 +30,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-#loader {
-  position: fixed; inset: 0; z-index: 10000;
-  background: var(--bg-primary);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  transition: opacity 0.5s, visibility 0.5s;
-}
-#loader.hidden { opacity: 0; visibility: hidden; }
-.loader-text { font-size: 2rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2rem; }
-.loader-bar { width: 200px; height: 3px; background: var(--bg-card); border-radius: 3px; overflow: hidden; }
-.loader-progress { height: 100%; width: 0%; background: var(--accent-gradient); border-radius: 3px; transition: width 0.1s; }
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 1rem 2rem;
@@ -247,10 +236,6 @@ footer {
 </style>
 </head>
 <body>
-<div id="loader">
-  <div class="loader-text">J.A.R.V.I.S.</div>
-  <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
-</div>
 <nav id="navbar">
   <div class="nav-container">
     <div class="nav-logo"><img src="jay_logo.svg" alt="JAY"> JAY</div>
@@ -450,14 +435,6 @@ footer {
 <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">^</button>
 <script>
 console.log('Portfolio Loaded');
-let progress = 0;
-const loaderProgress = document.getElementById('loaderProgress');
-const loader = document.getElementById('loader');
-const loadInterval = setInterval(() => {
-  progress += Math.random() * 15;
-  if (progress >= 100) { progress = 100; clearInterval(loadInterval); setTimeout(() => loader.classList.add('hidden'), 300); }
-  loaderProgress.style.width = progress + '%';
-}, 100);
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
