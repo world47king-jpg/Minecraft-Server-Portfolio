@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay — Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="jay_logo.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e0;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;background:rgba(10,10,26,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06)}
+nav .logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .links{display:flex;gap:2rem;list-style:none}
+nav .links a{color:#94a3b8;font-size:0.9rem;transition:color 0.3s}
+nav .links a:hover{color:#00d4ff}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(0,212,255,0.08) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(168,85,247,0.08) 0%,transparent 50%)}
+.hero-content{position:relative;z-index:1}
+.hero h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.hero h1 span{background:linear-gradient(135deg,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:#94a3b8;font-size:1.2rem;margin-bottom:2.5rem}
+.hero .cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:0.85rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s;border:none;display:inline-flex;align-items:center;gap:0.5rem}
+.btn-primary{background:linear-gradient(135deg,#00d4ff,#a855f7);color:#0a0a1a}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.3)}
+.btn-outline{background:transparent;color:#e0e0e0;border:2px solid rgba(255,255,255,0.15)}
+.btn-outline:hover{border-color:#00d4ff;color:#00d4ff}
+section{padding:6rem 0}
+.section-label{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:#00d4ff;margin-bottom:0.8rem;display:inline-block}
+.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem}
+.section-sub{color:#94a3b8;max-width:600px;margin:0 auto 3rem;text-align:center;font-size:1.05rem}
+.grid{display:grid;gap:2rem}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.card{background:#111128;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:2rem;transition:all 0.3s}
+.card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+.card h3{font-size:1.1rem;margin-bottom:0.5rem}
+.card p{color:#94a3b8;font-size:0.9rem;line-height:1.7}
+.tag{display:inline-block;padding:0.25rem 0.7rem;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(0,212,255,0.1);color:#00d4ff;border:1px solid rgba(0,212,255,0.15);margin:0.2rem}
+.form-card{background:#111128;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:2.5rem;max-width:600px;margin:0 auto}
+.form-card h3{font-size:1.3rem;margin-bottom:0.5rem}
+.form-card p{color:#94a3b8;margin-bottom:1.5rem;font-size:0.9rem}
+.input-group{margin-bottom:1rem}
+.input-group label{display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:1px}
+.input-group input,.input-group textarea{width:100%;padding:0.9rem 1.1rem;background:#0a0a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#e0e0e0;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.3s}
+.input-group input:focus,.input-group textarea:focus{border-color:#00d4ff}
+.input-group textarea{min-height:120px;resize:vertical}
+.btn-submit{width:100%;padding:1rem;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#0a0a1a;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.3)}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.info-item{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:#111128;border-radius:12px;border:1px solid rgba(255,255,255,0.06)}
+.info-icon{font-size:1.5rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(0,212,255,0.08);border-radius:10px;flex-shrink:0}
+.info-label{font-size:0.75rem;color:#64748b;text-transform:uppercase;letter-spacing:1px}
+.info-value{font-weight:600;font-size:0.95rem}
+footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06);color:#475569;font-size:0.85rem}
+@media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}nav .links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+<div class="container" style="display:flex;align-items:center;justify-content:space-between">
+<div class="logo">JAY</div>
+<ul class="links">
+<li><a href="#hero">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#work">Work</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+</nav>
+
+<section id="hero" class="hero">
+<div class="hero-content">
+<h1>I'm <span>Jay</span></h1>
+<p>Web Developer & Minecraft Server Specialist</p>
+<div class="cta">
+<a href="#work" class="btn btn-primary">View My Work</a>
+<a href="#contact" class="btn btn-outline">Get In Touch</a>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<span class="section-label">About</span>
+<h2 class="section-title">Who I Am</h2>
+<p class="section-sub">I build websites and Minecraft server infrastructure that actually work.</p>
+<div class="grid grid-2">
+<div class="card">
+<h3>Web Development</h3>
+<p>Modern, fast, responsive websites built with clean code. HTML, CSS, JavaScript, and frameworks that get the job done.</p>
+</div>
+<div class="card">
+<h3>Minecraft Servers</h3>
+<p>Custom plugins, server management, and performance optimization for Minecraft server networks.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="work">
+<div class="container">
+<span class="section-label">Portfolio</span>
+<h2 class="section-title">Featured Work</h2>
+<p class="section-sub">Projects I'm proud of.</p>
+<div class="grid grid-3">
+<div class="card">
+<h3>Agency Landing Page</h3>
+<p>Modern creative agency website with glassmorphism and smooth animations.</p>
+<div><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+</div>
+<div class="card">
+<h3>MC Server Dashboard</h3>
+<p>Real-time Minecraft server management with live player tracking and analytics.</p>
+<div><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+</div>
+<div class="card">
+<h3>Premium E-Commerce</h3>
+<p>Luxury product page with interactive cart, image zoom, and smooth checkout.</p>
+<div><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<span class="section-label">Contact</span>
+<h2 class="section-title">Let's Talk</h2>
+<p class="section-sub">Have a project in mind? Send me a message.</p>
+<div class="info-grid">
+<div class="info-item">
+<div class="info-icon">&#x1F4AC;</div>
+<div><div class="info-label">Discord</div><div class="info-value">underworld_4</div></div>
+</div>
+<div class="info-item">
+<div class="info-icon">&#x1F4BB;</div>
+<div><div class="info-label">GitHub</div><div class="info-value">world47king-jpg</div></div>
+</div>
+<div class="info-item">
+<div class="info-icon">&#x2709;</div>
+<div><div class="info-label">Email</div><div class="info-value">world47king@gmail.com</div></div>
+</div>
+</div>
+<div class="form-card">
+<h3>Send a Message</h3>
+<p>Fill out the form and I'll get back to you within 24 hours.</p>
+<form action="https://formsubmit.co/world47king@gmail.com" method="POST">
+<div class="input-group">
+<label for="name">Name</label>
+<input type="text" id="name" name="name" placeholder="Your name" required>
+</div>
+<div class="input-group">
+<label for="email">Email</label>
+<input type="email" id="email" name="email" placeholder="your@email.com" required>
+</div>
+<div class="input-group">
+<label for="message">Message</label>
+<textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+</div>
+<button type="submit" class="btn-submit">Send Message</button>
+</form>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>&copy; 2026 Jay. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>
