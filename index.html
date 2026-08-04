@@ -19,7 +19,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:1rem 2rem;background:rgba(6,9,15,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:all .3s}
 nav.scroll{padding:.6rem 2rem;background:rgba(6,9,15,.95)}
 .nbar{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.nlogo{font-size:1.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.nlogo{font-size:1.5rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:3px}
 .nlinks{display:flex;gap:2.5rem;list-style:none}
 .nlinks a{color:var(--txt2);text-decoration:none;font-size:.9rem;font-weight:500;transition:.3s;position:relative}
 .nlinks a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--grad);transition:width .3s}
@@ -103,9 +103,9 @@ section{padding:7rem 2rem;max-width:1300px;margin:0 auto}
 
 .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:950px;margin:0 auto}
 .cinfo{display:flex;flex-direction:column;gap:1.2rem}
-.citem{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:var(--card);border-radius:14px;border:1px solid var(--border);transition:.3s}
-.citem:hover{border-color:var(--cyan);transform:translateX(8px)}
-.cicon{width:48px;height:48px;background:rgba(0,229,255,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.citem{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:var(--card);border-radius:14px;border:1px solid var(--border);transition:.3s;cursor:pointer;text-decoration:none;color:var(--txt)}
+.citem:hover{border-color:var(--cyan);transform:translateX(8px);background:rgba(0,229,255,.05)}
+.cicon{width:48px;height:48px;background:rgba(0,229,255,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
 .clab{color:var(--txt3);font-size:.8rem}
 .cval{font-weight:600;font-size:.95rem}
 .cform{display:flex;flex-direction:column;gap:1rem}
@@ -116,7 +116,7 @@ section{padding:7rem 2rem;max-width:1300px;margin:0 auto}
 
 footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem;text-align:center;border-top:1px solid var(--border)}
 .fcontent{max-width:1300px;margin:0 auto}
-.flogo{font-size:1.5rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;letter-spacing:2px}
+.flogo{font-size:1.5rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;letter-spacing:3px}
 .flinks{display:flex;gap:2rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap}
 .flinks a{color:var(--txt2);text-decoration:none;transition:.3s}
 .flinks a:hover{color:var(--cyan)}
@@ -259,24 +259,26 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
   <p class="ssub reveal">Have a project? Let's build something great together.</p>
   <div class="contact-wrap">
     <div class="cinfo reveal">
-      <div class="citem">
+      <a class="citem" href="https://discord.com/users/underworld_4" target="_blank">
         <div class="cicon">&#x1F4AC;</div>
         <div><div class="clab">Discord</div><div class="cval">underworld_4</div></div>
-      </div>
-      <div class="citem">
+      </a>
+      <a class="citem" href="https://github.com/world47king-jpg" target="_blank">
         <div class="cicon">&#x1F419;</div>
         <div><div class="clab">GitHub</div><div class="cval">world47king-jpg</div></div>
-      </div>
-      <div class="citem">
+      </a>
+      <a class="citem" href="mailto:world47king@gmail.com">
         <div class="cicon">&#x1F4E7;</div>
         <div><div class="clab">Email</div><div class="cval">world47king@gmail.com</div></div>
-      </div>
-      <div class="citem">
+      </a>
+      <a class="citem" href="https://builtbybit.com/members/itsbnl.135857/" target="_blank">
         <div class="cicon">&#x1F310;</div>
         <div><div class="clab">BuiltByBit</div><div class="cval">itsbnl</div></div>
-      </div>
+      </a>
     </div>
-    <form class="cform reveal" id="contactForm">
+    <form class="cform reveal" id="contactForm" action="https://formsubmit.co/world47king@gmail.com" method="POST">
+      <input type="hidden" name="_next" value="https://world47king-jpg.github.io/Minecraft-Server-Portfolio/#contact">
+      <input type="hidden" name="_captcha" value="false">
       <input class="finput" type="text" name="name" placeholder="Your Name" required>
       <input class="finput" type="email" name="email" placeholder="Your Email" required>
       <textarea class="finput ftext" name="message" placeholder="Tell me about your project..." required></textarea>
@@ -303,150 +305,43 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
 
 <script>
 try {
+setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('hide');},1500);
 
-setTimeout(function() {
-  var l = document.getElementById('loader');
-  if (l) l.classList.add('hide');
-}, 1500);
+var canvas=document.getElementById('pcanvas'),ctx=canvas.getContext('2d'),particles=[],mouseX=0,mouseY=0;
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+resizeCanvas();window.addEventListener('resize',resizeCanvas);
+document.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY});
 
-// Particles
-var canvas = document.getElementById('pcanvas');
-var ctx = canvas.getContext('2d');
-var particles = [];
-var mouseX = 0, mouseY = 0;
+function Particle(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+.5;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.opacity=Math.random()*.5+.1}
+Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;var dx=mouseX-this.x,dy=mouseY-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){this.x-=dx*.008;this.y-=dy*.008}if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height}};
+Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle='rgba(0,229,255,'+this.opacity+')';ctx.fill()};
+for(var i=0;i<120;i++)particles.push(new Particle());
 
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw()}for(var i=0;i<particles.length;i++){for(var j=i+1;j<particles.length;j++){var dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;if(Math.sqrt(dx*dx+dy*dy)<130){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(0,229,255,0.06)';ctx.stroke()}}}requestAnimationFrame(animate)}
+animate();
 
-function Particle() {
-  this.x = Math.random() * canvas.width;
-  this.y = Math.random() * canvas.height;
-  this.size = Math.random() * 2 + 0.5;
-  this.vx = (Math.random() - 0.5) * 0.4;
-  this.vy = (Math.random() - 0.5) * 0.4;
-  this.opacity = Math.random() * 0.5 + 0.1;
-}
-Particle.prototype.update = function() {
-  this.x += this.vx; this.y += this.vy;
-  var dx = mouseX - this.x, dy = mouseY - this.y, d = Math.sqrt(dx*dx+dy*dy);
-  if (d < 160) { this.x -= dx*0.008; this.y -= dy*0.008; }
-  if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-  }
-};
-Particle.prototype.draw = function() {
-  ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(0,229,255,' + this.opacity + ')'; ctx.fill();
-};
-
-for (var i = 0; i < 120; i++) particles.push(new Particle());
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (var i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); }
-  for (var i = 0; i < particles.length; i++) {
-    for (var j = i+1; j < particles.length; j++) {
-      var dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
-      if (Math.sqrt(dx*dx+dy*dy) < 130) {
-        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = 'rgba(0,229,255,0.06)'; ctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-
-// Typing
-var te = document.getElementById('tp');
-var ph = ['Web Developer', 'Minecraft Server Specialist', 'Plugin Developer', 'Full Stack Engineer'];
-var pi = 0, ci = 0, del = false;
-function typeIt() {
-  var c = ph[pi];
-  te.textContent = del ? c.substring(0, ci--) : c.substring(0, ci++);
-  var d = del ? 40 : 90;
-  if (!del && ci === c.length + 1) { d = 2000; del = true; }
-  else if (del && ci === -1) { del = false; pi = (pi + 1) % ph.length; d = 400; }
-  setTimeout(typeIt, d);
-}
+var te=document.getElementById('tp'),ph=['Web Developer','Minecraft Server Specialist','Plugin Developer','Full Stack Engineer'],pi=0,ci=0,del=false;
+function typeIt(){var c=ph[pi];te.textContent=del?c.substring(0,ci--):c.substring(0,ci++);var d=del?40:90;if(!del&&ci===c.length+1){d=2000;del=true}else if(del&&ci===-1){del=false;pi=(pi+1)%ph.length;d=400}setTimeout(typeIt,d)}
 typeIt();
 
-// Nav
-var navEl = document.getElementById('nav');
-var bttBtn = document.getElementById('btt');
-window.addEventListener('scroll', function() {
-  navEl.classList.toggle('scroll', window.scrollY > 50);
-  bttBtn.classList.toggle('vis', window.scrollY > 500);
-});
+var navEl=document.getElementById('nav'),bttBtn=document.getElementById('btt');
+window.addEventListener('scroll',function(){navEl.classList.toggle('scroll',window.scrollY>50);bttBtn.classList.toggle('vis',window.scrollY>500)});
 
-// Mobile menu
-var hambEl = document.getElementById('hamb');
-var mobEl = document.getElementById('mob');
-function togMenu() { hambEl.classList.toggle('on'); mobEl.classList.toggle('on'); }
-hambEl.addEventListener('click', togMenu);
-var mLinks = mobEl.querySelectorAll('a');
-for (var i = 0; i < mLinks.length; i++) mLinks[i].addEventListener('click', togMenu);
+var hambEl=document.getElementById('hamb'),mobEl=document.getElementById('mob');
+function togMenu(){hambEl.classList.toggle('on');mobEl.classList.toggle('on')}
+hambEl.addEventListener('click',togMenu);
+var mLinks=mobEl.querySelectorAll('a');for(var i=0;i<mLinks.length;i++)mLinks[i].addEventListener('click',togMenu);
 
-// Scroll reveal
-var obs = new IntersectionObserver(function(entries) {
-  for (var i = 0; i < entries.length; i++) {
-    if (entries[i].isIntersecting) {
-      var el = entries[i].target;
-      el.classList.add('active');
-      var fills = el.querySelectorAll('.sfill');
-      for (var j = 0; j < fills.length; j++) fills[j].style.width = fills[j].getAttribute('data-w') + '%';
-      var nums = el.querySelectorAll('.stnum');
-      for (var j = 0; j < nums.length; j++) {
-        (function(n) {
-          var t = parseInt(n.getAttribute('data-target'));
-          var s = n.getAttribute('data-s') || '+';
-          var cur = 0, inc = t / 50;
-          var iv = setInterval(function() {
-            cur += inc;
-            if (cur >= t) { cur = t; clearInterval(iv); }
-            n.textContent = Math.floor(cur) + s;
-          }, 30);
-        })(nums[j]);
-      }
-    }
-  }
-}, { threshold: 0.2 });
+var obs=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){var el=entries[i].target;el.classList.add('active');var fills=el.querySelectorAll('.sfill');for(var j=0;j<fills.length;j++)fills[j].style.width=fills[j].getAttribute('data-w')+'%';var nums=el.querySelectorAll('.stnum');for(var j=0;j<nums.length;j++){(function(n){var t=parseInt(n.getAttribute('data-target')),s=n.getAttribute('data-s')||'+',cur=0,inc=t/50;var iv=setInterval(function(){cur+=inc;if(cur>=t){cur=t;clearInterval(iv)}n.textContent=Math.floor(cur)+s},30)})(nums[j])}}}},{threshold:0.2});
+var reveals=document.querySelectorAll('.reveal');for(var i=0;i<reveals.length;i++)obs.observe(reveils[i]);
 
-var reveals = document.querySelectorAll('.reveal');
-for (var i = 0; i < reveals.length; i++) obs.observe(reveals[i]);
+var ct=0,tcards=document.querySelectorAll('.tcard'),tdots=document.querySelectorAll('.tdot');
+function showT(idx){for(var i=0;i<tcards.length;i++){tcards[i].classList.remove('active');tdots[i].classList.remove('active')}tcards[idx].classList.add('active');tdots[idx].classList.add('active');ct=idx}
+setInterval(function(){showT((ct+1)%tcards.length)},5000);
 
-// Testimonials
-var ct = 0;
-var tcards = document.querySelectorAll('.tcard');
-var tdots = document.querySelectorAll('.tdot');
-function showT(idx) {
-  for (var i = 0; i < tcards.length; i++) { tcards[i].classList.remove('active'); tdots[i].classList.remove('active'); }
-  tcards[idx].classList.add('active'); tdots[idx].classList.add('active'); ct = idx;
-}
-setInterval(function() { showT((ct + 1) % tcards.length); }, 5000);
+document.getElementById('contactForm').addEventListener('submit',function(){var btn=this.querySelector('button[type=submit]');btn.textContent='Sending...';setTimeout(function(){btn.textContent='Sent!';btn.style.background='linear-gradient(135deg,#10b981,#059669)';setTimeout(function(){btn.textContent='Send Message';btn.style.background=''},3000)},500)});
 
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var btn = this.querySelector('button');
-  var orig = btn.textContent;
-  btn.textContent = 'Sent!';
-  btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-  setTimeout(function() {
-    btn.textContent = orig;
-    btn.style.background = '';
-  }, 2500);
-  this.reset();
-});
-
-} catch(e) {
-  var l = document.getElementById('loader');
-  if (l) l.classList.add('hide');
-}
+}catch(e){var l=document.getElementById('loader');if(l)l.classList.add('hide')}
 </script>
 </body>
 </html>
