@@ -201,16 +201,15 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);co
 <div class="form-card reveal">
 <h3>Send a Message</h3>
 <p>Fill out the form and I'll get back to you within 24 hours.</p>
-<form id="contactForm" action="https://formsubmit.co/world47king@gmail.com" method="POST">
+<form action="https://formsubmit.co/world47king@gmail.com" method="POST">
 <input type="hidden" name="_subject" value="New Portfolio Contact">
-<input type="hidden" name="_next" value="https://world47king-jpg.github.io/Minecraft-Server-Portfolio/thank-you">
+<input type="hidden" name="_next" value="https://world47king-jpg.github.io/Minecraft-Server-Portfolio/thank-you.html">
 <input type="hidden" name="_captcha" value="false">
 <div class="input-group"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required></div>
 <div class="input-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required></div>
 <div class="input-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea></div>
-<button type="submit" class="btn-submit" id="submitBtn">Send Message</button>
+<button type="submit" class="btn-submit">Send Message</button>
 </form>
-<div class="success-msg" id="successMsg"><h4>&#10003; Message Sent!</h4><p>Thanks for reaching out! I'll get back to you within 24 hours.</p></div>
 </div>
 </div>
 </section>
@@ -225,11 +224,10 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);co
 </footer>
 
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
-<div class="toast" id="toast"></div>
 
 <script>
 const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');let W,H,particles=[];let mouseX=0,mouseY=0;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}resize();window.addEventListener('resize',resize);document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY});
-class P{constructor(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()*2+0.5;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.o=Math.random()*0.5+0.1;this.h=Math.random()>0.5?190:260}update(){this.x+=this.vx;this.y+=this.vy;const dx=mouseX-this.x,dy=mouseY-this.y;const d=Math.sqrt(dx*dx+dy*dy);if(d<150){this.x-=dx*0.005;this.y-=dy*0.005}if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle=`hsla(${this.h},100%,60%,${this.o})`;ctx.fill()}}
+class P{constructor(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()*2+0.5;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.o=Math.random()*0.5+0.1;this.h=Math.random()>0.5?190:260}update(){this.x+=this.vx;this.y+=this.vy;const dx=mouseX-this.x,dy=mouseY-this.y;const d=Math.sqrt(dx*dx+dy*dy);if(d<150){this.x-=dx*0.005;this.y-=dy*0.005}if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle='hsla('+this.h+',100%,60%,'+this.o+')';ctx.fill()}}
 for(let i=0;i<60;i++)particles.push(new P());
 function animate(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw()});particles.forEach((a,i)=>{particles.slice(i+1).forEach(b=>{const dx=a.x-b.x,dy=a.y-b.y;if(Math.sqrt(dx*dx+dy*dy)<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(0,212,255,0.04)';ctx.stroke()}})});requestAnimationFrame(animate)}animate();
 
@@ -239,10 +237,6 @@ const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isInt
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 function toggleMenu(){document.getElementById('mobMenu').classList.toggle('on');document.getElementById('hambBtn').classList.toggle('on')}
-
-const form=document.getElementById('contactForm');const successMsg=document.getElementById('successMsg');const submitBtn=document.getElementById('submitBtn');const toast=document.getElementById('toast');
-form.addEventListener('submit',function(e){e.preventDefault();submitBtn.disabled=true;submitBtn.textContent='Sending...';const fd=new FormData(this);fetch('https://formsubmit.co/world47king@gmail.com',{method:'POST',body:fd,headers:{'Accept':'text/html'}}).then(r=>{if(r.ok){successMsg.classList.add('show');form.reset();showToast('Message sent! Check your email.','success')}else{showToast('Something went wrong. Please try again.','error')}}).catch(()=>{showToast('Network error. Please check your connection.','error')}).finally(()=>{submitBtn.disabled=false;submitBtn.textContent='Send Message'})});
-function showToast(msg,type){toast.textContent=msg;toast.className='toast '+type;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),4000)}
 </script>
 </body>
 </html>
