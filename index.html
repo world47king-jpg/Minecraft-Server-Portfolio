@@ -226,16 +226,32 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);co
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <script>
-const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');let W,H,particles=[];let mouseX=0,mouseY=0;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}resize();window.addEventListener('resize',resize);document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY});
-class P{constructor(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()*2+0.5;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.o=Math.random()*0.5+0.1;this.h=Math.random()>0.5?190:260}update(){this.x+=this.vx;this.y+=this.vy;const dx=mouseX-this.x,dy=mouseY-this.y;const d=Math.sqrt(dx*dx+dy*dy);if(d<150){this.x-=dx*0.005;this.y-=dy*0.005}if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle='hsla('+this.h+',100%,60%,'+this.o+')';ctx.fill()}}
-for(let i=0;i<60;i++)particles.push(new P());
-function animate(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw()});particles.forEach((a,i)=>{particles.slice(i+1).forEach(b=>{const dx=a.x-b.x,dy=a.y-b.y;if(Math.sqrt(dx*dx+dy*dy)<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(0,212,255,0.04)';ctx.stroke()}})});requestAnimationFrame(animate)}animate();
-
-const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50);document.getElementById('btt').classList.toggle('show',window.scrollY>500)});
-
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');e.target.querySelectorAll('.stat-num').forEach(n=>{const t=parseInt(n.dataset.target);const s=n.dataset.suffix||'';let c=0;const inc=t/60;const iv=setInterval(()=>{c+=inc;if(c>=t){c=t;clearInterval(iv)}n.textContent=Math.floor(c)+s},30)}})}}),{threshold:0.15});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
+var canvas=document.getElementById('particles');var ctx=canvas.getContext('2d');var W,H,particles=[];var mouseX=0,mouseY=0;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+document.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY});
+function P(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()*2+0.5;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.o=Math.random()*0.5+0.1;this.h=Math.random()>0.5?190:260}
+P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;var dx=mouseX-this.x,dy=mouseY-this.y;var d=Math.sqrt(dx*dx+dy*dy);if(d<150){this.x-=dx*0.005;this.y-=dy*0.005}if(this.x<0||this.x>W||this.y<0||this.y>H)this.x=Math.random()*W,this.y=Math.random()*H};
+P.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle='hsla('+this.h+',100%,60%,'+this.o+')';ctx.fill()};
+for(var i=0;i<60;i++)particles.push(new P());
+function animate(){ctx.clearRect(0,0,W,H);particles.forEach(function(p){p.update();p.draw()});particles.forEach(function(a,i){particles.slice(i+1).forEach(function(b){var dx=a.x-b.x,dy=a.y-b.y;if(Math.sqrt(dx*dx+dy*dy)<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(0,212,255,0.04)';ctx.stroke()}})});requestAnimationFrame(animate)}
+animate();
+var navbar=document.getElementById('navbar');
+window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>50);document.getElementById('btt').classList.toggle('show',window.scrollY>500)});
+document.querySelectorAll('.reveal').forEach(function(el){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('active');
+        entry.target.querySelectorAll('.stat-num').forEach(function(n){
+          var target=parseInt(n.dataset.target),suffix=n.dataset.suffix||'',current=0,inc=target/60;
+          var iv=setInterval(function(){current+=inc;if(current>=target){current=target;clearInterval(iv)}n.textContent=Math.floor(current)+suffix},30);
+        });
+      }
+    });
+  },{threshold:0.15});
+  obs.observe(el);
+});
 function toggleMenu(){document.getElementById('mobMenu').classList.toggle('on');document.getElementById('hambBtn').classList.toggle('on')}
 </script>
 </body>
