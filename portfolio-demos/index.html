@@ -374,6 +374,7 @@ footer {
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
+/* Responsive */
 /* Modal */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.7);
@@ -409,7 +410,6 @@ footer {
 }
 .modal-text { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
 
-/* Responsive */
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
@@ -676,10 +676,12 @@ footer {
         <div><div class="contact-label">Email</div><div class="contact-value">world47king@gmail.com</div></div>
       </div>
     </div>
-    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
-      <input type="text" class="form-input" placeholder="Your Name" required>
-      <input type="email" class="form-input" placeholder="Your Email" required>
-      <textarea class="form-input form-textarea" placeholder="Tell me about your project..." required></textarea>
+    <form class="contact-form reveal" action="https://formsubmit.co/ajax/world47king@gmail.com" method="POST" onsubmit="handleSubmit(event)">
+      <input type="text" class="form-input" name="name" placeholder="Your Name" required>
+      <input type="email" class="form-input" name="email" placeholder="Your Email" required>
+      <input type="hidden" name="_subject" value="New Portfolio Contact">
+      <input type="text" name="_honey" style="display:none">
+      <textarea class="form-input form-textarea" name="message" placeholder="Tell me about your project..." required></textarea>
       <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
     </form>
   </div>
@@ -840,8 +842,26 @@ setInterval(() => { showTestimonial((currentTestimonial + 1) % 3); }, 5000);
 // Form
 function handleSubmit(e) {
   e.preventDefault();
-  document.getElementById('thankYouModal').classList.add('active');
-  e.target.reset();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  const origText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  }).then(r => r.json()).then(data => {
+    document.getElementById('thankYouModal').classList.add('active');
+    form.reset();
+    btn.textContent = origText;
+    btn.disabled = false;
+  }).catch(err => {
+    document.getElementById('thankYouModal').classList.add('active');
+    form.reset();
+    btn.textContent = origText;
+    btn.disabled = false;
+  });
 }
 function closeModal() {
   document.getElementById('thankYouModal').classList.remove('active');
