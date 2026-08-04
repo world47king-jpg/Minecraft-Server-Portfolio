@@ -1,27 +1,21 @@
 # Minecraft Server Portfolio
 
-**Built by:** Jay | **Version:** 3.0
+**Built by:** Jay | **Version:** 4.0
 
 **Live Site:** https://world47king-jpg.github.io/Minecraft-Server-Portfolio/
 
-**Mission:**
-Jay specializes in building robust Minecraft server infrastructure and modern web experiences. From custom plugins that deliver flawless performance to pixel-perfect websites with smooth animations, every project is crafted with precision and passion.
-
-**Portfolio Updates:** Latest comprehensive rebuild with full contact form Fixer
-**Last Updated:** 2026-08-04T14:45:00Z
-
-## Key Features
-- Modern dark theme with cyan/purple accents
-- Full contact form working (FormSubmit.co integration)
-- Custom thank-you modal
-- Smooth scroll animations
-- Counter animations
+## Features
+- Modern dark theme with cyan/purple gradients
+- Particle animation background
+- Terminal-style about section
+- Animated skill bars
+- Portfolio demos (Landing Page, MC Dashboard, E-Commerce)
+- Workflow/Process section
 - Testimonials carousel
-- Project showcase with hover effects
+- **Working contact form** (FormSubmit.co)
 - Mouse glow effect
 - Scroll progress bar
-- Responsive design (mobile-friendly)
-- 3 complete demo projects
+- Responsive design
 
 ## Contact
 - Discord: underworld_4
@@ -29,8 +23,7 @@ Jay specializes in building robust Minecraft server infrastructure and modern we
 - GitHub: world47king-jpg
 - BuiltByBit: itsbnl
 
-*Portfolio rebuilt successfully - all forms now working correctly!*
+## Tech Stack
+HTML/CSS/JavaScript, Python, Java, Node.js, Minecraft Plugins, Git
 
----
-**Tech Stack:** HTML/CSS/JavaScript, Python, Java, Node.js, Minecraft Plugins, Git, GitHub
-*Each project demonstrates expertise in clean code and user experience design*
+*Portfolio rebuilt v4.0 - contact form now working correctly!*
