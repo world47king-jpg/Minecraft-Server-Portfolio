@@ -41,6 +41,7 @@ nav .links a.active{color:var(--cyan)}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(0,212,255,0.4)}
 .btn-outline{background:transparent;color:var(--txt);border:2px solid rgba(255,255,255,0.15)}
 .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
+.btn-sm{padding:0.5rem 1.2rem;font-size:0.85rem;border-radius:8px}
 section{padding:6rem 0}
 .section-label{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--cyan);margin-bottom:0.8rem;display:inline-block;position:relative;padding-left:1.5rem}
 .section-label::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;background:var(--cyan);border-radius:50%}
@@ -50,7 +51,7 @@ section{padding:6rem 0}
 .grid-2{grid-template-columns:repeat(2,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
 .grid-4{grid-template-columns:repeat(4,1fr)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;cursor:pointer}
 .card::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity 0.3s}
 .card:hover::before{opacity:0.03}
 .card:hover{border-color:rgba(0,212,255,0.2);transform:translateY(-6px);box-shadow:var(--shadow)}
@@ -91,16 +92,28 @@ section{padding:6rem 0}
 .toast.error{border-color:#ef4444}
 footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--txt3);font-size:0.85rem}
 .footer-links{display:flex;gap:2rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}
-.footer-links a{color:var(--txt2);transition:color 0.3s}
+.footer-links a{color:var(--txt2);transition:color 0.3s;display:flex;align-items:center;gap:0.4rem}
 .footer-links a:hover{color:var(--cyan)}
+.footer-socials{display:flex;gap:1rem;justify-content:center;margin:1rem 0}
+.footer-socials a{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--txt2);font-size:1.1rem;transition:all 0.3s}
+.footer-socials a:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
 #btt{position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--grad);border:none;border-radius:50%;color:#0a0a1a;font-size:1.2rem;cursor:pointer;opacity:0;visibility:hidden;transition:all 0.3s;z-index:900;display:flex;align-items:center;justify-content:center;box-shadow:var(--glow)}
 #btt.show{opacity:1;visibility:visible}
 #btt:hover{transform:translateY(-3px) scale(1.1)}
 .reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.4,0,0.2,1)}
 .reveal.active{opacity:1;transform:translateY(0)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(4px)}
+.modal-overlay.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.4s ease}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--txt);font-size:1.5rem;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;transition:all 0.3s}
+.modal-close:hover{background:rgba(255,255,255,0.1)}
+.modal h3{font-size:1.5rem;margin-bottom:0.5rem}
+.modal p{color:var(--txt2);font-size:0.95rem;line-height:1.7;margin-bottom:1rem}
+.modal .demo-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.5rem;background:var(--grad);color:#0a0a1a;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s}
+.modal .demo-link:hover{transform:translateY(-2px);box-shadow:var(--glow)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,0.5)}50%{box-shadow:0 0 0 8px rgba(0,212,255,0)}}
-@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}nav .links{display:none}.hamb{display:flex}.form-card{padding:1.5rem}.hero h1{font-size:clamp(2.5rem,12vw,4rem)}}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}nav .links{display:none}.hamb{display:flex}.form-card{padding:1.5rem}.hero h1{font-size:clamp(2.5rem,12vw,4rem)}.modal{padding:1.5rem}}
 </style>
 </head>
 <body>
@@ -164,21 +177,21 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);co
 <div class="container">
 <span class="section-label">Portfolio</span>
 <h2 class="section-title reveal">Featured Work</h2>
-<p class="section-sub reveal">Projects I'm proud of.</p>
+<p class="section-sub reveal">Projects I'm proud of. Click any card to learn more.</p>
 <div class="grid grid-3">
-<div class="card reveal">
+<div class="card reveal" onclick="openModal(0)">
 <div style="font-size:3rem;margin-bottom:1rem">&#x1F3E0;</div>
 <h3>Agency Landing Page</h3>
 <p>Modern creative agency website with glassmorphism and smooth animations.</p>
 <div style="margin-top:1rem"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
 </div>
-<div class="card reveal">
+<div class="card reveal" onclick="openModal(1)">
 <div style="font-size:3rem;margin-bottom:1rem">&#x1F5A5;</div>
 <h3>MC Server Dashboard</h3>
 <p>Real-time Minecraft server management with live player tracking and analytics.</p>
 <div style="margin-top:1rem"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
 </div>
-<div class="card reveal">
+<div class="card reveal" onclick="openModal(2)">
 <div style="font-size:3rem;margin-bottom:1rem">&#x1F6D2;</div>
 <h3>Premium E-Commerce</h3>
 <p>Luxury product page with interactive cart, image zoom, and smooth checkout.</p>
@@ -214,8 +227,20 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);co
 </div>
 </section>
 
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal" id="modalContent" onclick="event.stopPropagation()">
+<button class="modal-close" onclick="closeModal()">&#10005;</button>
+<div id="modalBody"></div>
+</div>
+</div>
+
 <footer>
 <div class="container">
+<div class="footer-socials">
+<a href="https://github.com/world47king-jpg" title="GitHub" target="_blank">&#x1F4BB;</a>
+<a href="https://discord.com" title="Discord" target="_blank">&#x1F4AC;</a>
+<a href="mailto:world47king@gmail.com" title="Email">&#x2709;</a>
+</div>
 <div class="footer-links">
 <a href="#hero">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a>
 </div>
@@ -253,6 +278,10 @@ document.querySelectorAll('.reveal').forEach(function(el){
   obs.observe(el);
 });
 function toggleMenu(){document.getElementById('mobMenu').classList.toggle('on');document.getElementById('hambBtn').classList.toggle('on')}
+var projects=[{title:'Agency Landing Page',desc:'A modern creative agency website featuring glassmorphism design, parallax scrolling, smooth animations, and responsive layout. Built with vanilla HTML, CSS, and JavaScript for maximum performance.',tags:['HTML','CSS','JavaScript'],demo:'portfolio-demos/landing-page/'},{title:'MC Server Dashboard',desc:'Real-time Minecraft server management dashboard with live player tracking, console output, plugin management, and performance analytics charts. Built for server administrators who need instant insights.',tags:['HTML','CSS','JavaScript'],demo:'portfolio-demos/mc-dashboard/'},{title:'Premium E-Commerce',desc:'Luxury product page with interactive shopping cart, image zoom, customer reviews, and a sleek dark gold theme. Fully responsive with smooth checkout flow.',tags:['HTML','CSS','JavaScript'],demo:'portfolio-demos/ecommerce/'}];
+function openModal(idx){var p=projects[idx];document.getElementById('modalBody').innerHTML='<h3>'+p.title+'</h3><p>'+p.desc+'</p><div style="margin-bottom:1rem">'+p.tags.map(function(t){return\'<span class="tag">\'+t+\'</span>\'}).join(' ')+'</div><a href="'+p.demo+'" class="demo-link" target="_blank">View Demo &#8594;</a>';document.getElementById('modalOverlay').classList.add('on')}
+function closeModal(e){if(e&&e.target!==document.getElementById('modalOverlay'))return;document.getElementById('modalOverlay').classList.remove('on')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('modalOverlay').classList.remove('on')});
 </script>
 </body>
 </html>
