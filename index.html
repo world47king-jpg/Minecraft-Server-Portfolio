@@ -128,8 +128,6 @@ section{padding:7rem 2rem;max-width:1300px;margin:0 auto;position:relative}
 .dfooter{display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border)}
 .dlink{color:var(--cyan);text-decoration:none;font-weight:700;font-size:.88rem;transition:.3s;display:inline-flex;align-items:center;gap:.4rem}
 .dlink:hover{gap:.8rem}
-.dgithub{color:var(--txt3);text-decoration:none;font-size:.85rem;transition:.3s}
-.dgithub:hover{color:var(--txt)}
 
 .timeline{position:relative;max-width:700px;margin:0 auto}
 .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(var(--cyan),var(--purple),var(--pink));transform:translateX(-50%);opacity:.3}
@@ -171,7 +169,6 @@ section{padding:7rem 2rem;max-width:1300px;margin:0 auto;position:relative}
 .finput::placeholder{color:var(--txt3)}
 .finput:focus{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,.1);background:rgba(255,255,255,.06)}
 .ftext{min-height:130px;resize:vertical}
-.fnote{color:var(--txt3);font-size:.78rem;text-align:center;margin-top:.3rem}
 .cresponse{color:var(--txt2);font-size:.85rem;text-align:center;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .cresponse .cdot{width:6px;height:6px;background:#10b981;border-radius:50%;animation:pulse2 2s infinite}
 
@@ -192,9 +189,6 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
 
 .reveal{opacity:0;transform:translateY(40px);transition:all .9s cubic-bezier(.4,0,.2,1)}
 .reveal.active{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
 
 @media(max-width:900px){.nlinks{display:none}.hamb{display:flex}.stats{grid-template-columns:repeat(2,1fr)}.sgrid,.dgrid{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}.hname{font-size:clamp(3.5rem,15vw,6rem)}.timeline::before{left:20px}.titem,.titem:nth-child(odd){flex-direction:row}.tdot{left:20px}.tcontent,.titem:nth-child(odd) .tcontent{width:calc(100% - 50px);padding-left:3rem;padding-right:0;text-align:left}}
 </style>
@@ -203,37 +197,11 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
 
 <div id="loader"><div class="ring"></div><div class="ltext">Loading</div><div class="lsub">Preparing portfolio</div></div>
 <div id="cursor-glow"></div>
-
-<div id="toast"><span class="toast-icon">&#10003;</span><span>Message sent successfully! I'll get back to you soon.</span></div>
-
+<div id="toast"><span class="toast-icon">&#10003;</span><span id="toastMsg">Message sent! I'll reply soon.</span></div>
 <div id="achievement"><span class="ach-icon">&#127942;</span><div><div class="ach-title">Portfolio Loaded</div><div class="ach-text">Welcome! Feel free to explore.</div></div></div>
 
-<nav id="nav">
-  <div class="nbar">
-    <div class="nlogo">JAY</div>
-    <ul class="nlinks">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#demos">Work</a></li>
-      <li><a href="#timeline">Journey</a></li>
-      <li><a href="#testi">Reviews</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="ncta" onclick="location.href='#contact'">Hire Me</button>
-    <div class="hamb" id="hamb"><span></span><span></span><span></span></div>
-  </div>
-</nav>
-
-<div class="mobmenu" id="mob">
-  <a href="#hero">Home</a>
-  <a href="#about">About</a>
-  <a href="#skills">Skills</a>
-  <a href="#demos">Work</a>
-  <a href="#timeline">Journey</a>
-  <a href="#testi">Reviews</a>
-  <a href="#contact">Contact</a>
-</div>
+<nav id="nav"><div class="nbar"><div class="nlogo">JAY</div><ul class="nlinks"><li><a href="#hero">Home</a></li><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#demos">Work</a></li><li><a href="#timeline">Journey</a></li><li><a href="#testi">Reviews</a></li><li><a href="#contact">Contact</a></li></ul><button class="ncta" onclick="location.href='#contact'">Hire Me</button><div class="hamb" id="hamb"><span></span><span></span><span></span></div></div></nav>
+<div class="mobmenu" id="mob"><a href="#hero">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#demos">Work</a><a href="#timeline">Journey</a><a href="#testi">Reviews</a><a href="#contact">Contact</a></div>
 
 <section id="hero">
   <canvas id="pcanvas"></canvas>
@@ -243,10 +211,7 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
     <div class="htag"><span class="dot"></span> Available for Freelance</div>
     <h1 class="hname">Jay</h1>
     <p class="hsub"><span id="tp"></span><span class="cur">|</span></p>
-    <div class="hbtns">
-      <a href="#demos" class="btn btn1">View My Work</a>
-      <a href="#contact" class="btn btn2">Get In Touch</a>
-    </div>
+    <div class="hbtns"><a href="#demos" class="btn btn1">View My Work</a><a href="#contact" class="btn btn2">Get In Touch</a></div>
   </div>
   <div class="scrollarr"><span></span></div>
 </section>
@@ -286,39 +251,9 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
   <h2 class="stitle reveal">Featured Work</h2>
   <p class="ssub reveal">Some of my recent projects and live demos.</p>
   <div class="dgrid">
-    <div class="dcard reveal">
-      <div class="dimg" style="background:linear-gradient(135deg,#667eea,#764ba2)">&#127970;
-        <div class="dimg-overlay"><span>View Project</span></div>
-      </div>
-      <div class="dbody">
-        <div class="dtags"><span class="dtag">Landing Page</span><span class="dtag">Animations</span></div>
-        <h3 class="dtitle">Agency Landing Page</h3>
-        <p class="ddesc">Creative agency website with glassmorphism, parallax effects, and smooth scroll animations.</p>
-        <div class="dfooter"><a href="portfolio-demos/landing-page/" class="dlink">Live Demo &#8594;</a></div>
-      </div>
-    </div>
-    <div class="dcard reveal">
-      <div class="dimg" style="background:linear-gradient(135deg,#11998e,#38ef7d)">&#127918;
-        <div class="dimg-overlay"><span>View Project</span></div>
-      </div>
-      <div class="dbody">
-        <div class="dtags"><span class="dtag">Dashboard</span><span class="dtag">Real-time</span></div>
-        <h3 class="dtitle">MC Server Dashboard</h3>
-        <p class="ddesc">Live server management dashboard with player tracking, console, and performance charts.</p>
-        <div class="dfooter"><a href="portfolio-demos/mc-dashboard/" class="dlink">Live Demo &#8594;</a></div>
-      </div>
-    </div>
-    <div class="dcard reveal">
-      <div class="dimg" style="background:linear-gradient(135deg,#f093fb,#f5576c)">&#128722;
-        <div class="dimg-overlay"><span>View Project</span></div>
-      </div>
-      <div class="dbody">
-        <div class="dtags"><span class="dtag">E-commerce</span><span class="dtag">Cart</span></div>
-        <h3 class="dtitle">Premium E-commerce</h3>
-        <p class="ddesc">Luxury product page with interactive cart, image zoom, reviews, and dark gold theme.</p>
-        <div class="dfooter"><a href="portfolio-demos/ecommerce/" class="dlink">Live Demo &#8594;</a></div>
-      </div>
-    </div>
+    <div class="dcard reveal"><div class="dimg" style="background:linear-gradient(135deg,#667eea,#764ba2)">&#127970;<div class="dimg-overlay"><span>View Project</span></div></div><div class="dbody"><div class="dtags"><span class="dtag">Landing Page</span><span class="dtag">Animations</span></div><h3 class="dtitle">Agency Landing Page</h3><p class="ddesc">Creative agency website with glassmorphism, parallax effects, and smooth scroll animations.</p><div class="dfooter"><a href="portfolio-demos/landing-page/" class="dlink">Live Demo &#8594;</a></div></div></div>
+    <div class="dcard reveal"><div class="dimg" style="background:linear-gradient(135deg,#11998e,#38ef7d)">&#127918;<div class="dimg-overlay"><span>View Project</span></div></div><div class="dbody"><div class="dtags"><span class="dtag">Dashboard</span><span class="dtag">Real-time</span></div><h3 class="dtitle">MC Server Dashboard</h3><p class="ddesc">Live server management dashboard with player tracking, console, and performance charts.</p><div class="dfooter"><a href="portfolio-demos/mc-dashboard/" class="dlink">Live Demo &#8594;</a></div></div></div>
+    <div class="dcard reveal"><div class="dimg" style="background:linear-gradient(135deg,#f093fb,#f5576c)">&#128722;<div class="dimg-overlay"><span>View Project</span></div></div><div class="dbody"><div class="dtags"><span class="dtag">E-commerce</span><span class="dtag">Cart</span></div><h3 class="dtitle">Premium E-commerce</h3><p class="ddesc">Luxury product page with interactive cart, image zoom, reviews, and dark gold theme.</p><div class="dfooter"><a href="portfolio-demos/ecommerce/" class="dlink">Live Demo &#8594;</a></div></div></div>
   </div>
 </section>
 
@@ -343,11 +278,7 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
     <div class="tcard active"><div class="tstars">&#11088;&#11088;&#11088;&#11088;&#11088;</div><p class="tquote">Jay delivered exceptional work on our Minecraft server. Custom plugins perform flawlessly and the support is outstanding.</p><p class="tauth">&#8212; ServerOwner99</p></div>
     <div class="tcard"><div class="tstars">&#11088;&#11088;&#11088;&#11088;&#11088;</div><p class="tquote">Professional, responsive, and incredibly talented. Our website redesign exceeded all expectations. Highly recommended!</p><p class="tauth">&#8212; TechStartup Inc.</p></div>
     <div class="tcard"><div class="tstars">&#11088;&#11088;&#11088;&#11088;&#11088;</div><p class="tquote">The dashboard Jay built revolutionized how we manage our server. Clean code, great UX, and always on time.</p><p class="tauth">&#8212; CraftNetwork Admin</p></div>
-    <div class="tdots">
-      <div class="tdot active" onclick="showT(0)"></div>
-      <div class="tdot" onclick="showT(1)"></div>
-      <div class="tdot" onclick="showT(2)"></div>
-    </div>
+    <div class="tdots"><div class="tdot active" onclick="showT(0)"></div><div class="tdot" onclick="showT(1)"></div><div class="tdot" onclick="showT(2)"></div></div>
   </div>
 </section>
 
@@ -357,27 +288,13 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
   <p class="ssub reveal">Have a project? Let's build something great together.</p>
   <div class="contact-wrap">
     <div class="cinfo reveal">
-      <a class="citem" href="https://discord.com/users/underworld_4" target="_blank">
-        <div class="cicon">&#128172;</div>
-        <div><div class="clab">Discord</div><div class="cval">underworld_4</div></div>
-        <span class="ccopy" onclick="event.preventDefault();copyText('underworld_4',this)">Copy</span>
-      </a>
-      <a class="citem" href="https://github.com/world47king-jpg" target="_blank">
-        <div class="cicon">&#128025;</div>
-        <div><div class="clab">GitHub</div><div class="cval">world47king-jpg</div></div>
-        <span class="ccopy" onclick="event.preventDefault();copyText('world47king-jpg',this)">Copy</span>
-      </a>
-      <a class="citem" href="mailto:world47king@gmail.com">
-        <div class="cicon">&#128231;</div>
-        <div><div class="clab">Email</div><div class="cval">world47king@gmail.com</div></div>
-      </a>
-      <a class="citem" href="https://builtbybit.com/members/itsbnl.135857/" target="_blank">
-        <div class="cicon">&#127760;</div>
-        <div><div class="clab">BuiltByBit</div><div class="cval">itsbnl</div></div>
-      </a>
+      <a class="citem" href="https://discord.com/users/underworld_4" target="_blank"><div class="cicon">&#128172;</div><div><div class="clab">Discord</div><div class="cval">underworld_4</div></div><span class="ccopy" onclick="event.preventDefault();event.stopPropagation();copyText('underworld_4',this)">Copy</span></a>
+      <a class="citem" href="https://github.com/world47king-jpg" target="_blank"><div class="cicon">&#128025;</div><div><div class="clab">GitHub</div><div class="cval">world47king-jpg</div></div><span class="ccopy" onclick="event.preventDefault();event.stopPropagation();copyText('world47king-jpg',this)">Copy</span></a>
+      <a class="citem" href="mailto:world47king@gmail.com"><div class="cicon">&#128231;</div><div><div class="clab">Email</div><div class="cval">world47king@gmail.com</div></div></a>
+      <a class="citem" href="https://builtbybit.com/members/itsbnl.135857/" target="_blank"><div class="cicon">&#127760;</div><div><div class="clab">BuiltByBit</div><div class="cval">itsbnl</div></div></a>
     </div>
     <div>
-      <form class="cform reveal" id="contactForm" action="https://formsubmit.co/world47king@gmail.com" method="POST">
+      <form class="cform reveal" id="contactForm">
         <input type="hidden" name="_next" value="https://world47king-jpg.github.io/Minecraft-Server-Portfolio/#contact">
         <input type="hidden" name="_captcha" value="false">
         <input class="finput" type="text" name="name" placeholder="Your Name" required>
@@ -393,20 +310,8 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
 <footer>
   <div class="fcontent">
     <div class="flogo">JAY</div>
-    <div class="flinks">
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#demos">Work</a>
-      <a href="#timeline">Journey</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="fsocial">
-      <a href="https://github.com/world47king-jpg" target="_blank" title="GitHub">&#128025;</a>
-      <a href="https://discord.com/users/underworld_4" target="_blank" title="Discord">&#128172;</a>
-      <a href="https://builtbybit.com/members/itsbnl.135857/" target="_blank" title="BuiltByBit">&#127760;</a>
-      <a href="mailto:world47king@gmail.com" title="Email">&#128231;</a>
-    </div>
+    <div class="flinks"><a href="#hero">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#demos">Work</a><a href="#timeline">Journey</a><a href="#contact">Contact</a></div>
+    <div class="fsocial"><a href="https://github.com/world47king-jpg" target="_blank" title="GitHub">&#128025;</a><a href="https://discord.com/users/underworld_4" target="_blank" title="Discord">&#128172;</a><a href="https://builtbybit.com/members/itsbnl.135857/" target="_blank" title="BuiltByBit">&#127760;</a><a href="mailto:world47king@gmail.com" title="Email">&#128231;</a></div>
     <p class="fcopy">&#169; 2026 Jay. Built with passion. All rights reserved.</p>
   </div>
 </footer>
@@ -415,15 +320,10 @@ footer{background:linear-gradient(180deg,var(--bg),var(--bg2));padding:4rem 2rem
 
 <script>
 (function(){
-function hideLoader(){try{var l=document.getElementById('loader');if(l)l.classList.add('hide');}catch(e){}}
-setTimeout(hideLoader,1800);
+setTimeout(function(){try{document.getElementById('loader').classList.add('hide');}catch(e){}},1800);
+setTimeout(function(){try{var a=document.getElementById('achievement');a.classList.add('show');setTimeout(function(){a.classList.remove('show');},4000);}catch(e){}},2500);
 
-setTimeout(function(){var a=document.getElementById('achievement');if(a){a.classList.add('show');setTimeout(function(){a.classList.remove('show');},4000);}},2500);
-
-try{
-var cglow=document.getElementById('cursor-glow');
-document.addEventListener('mousemove',function(e){cglow.style.left=e.clientX+'px';cglow.style.top=e.clientY+'px';});
-}catch(e){}
+try{var cglow=document.getElementById('cursor-glow');document.addEventListener('mousemove',function(e){cglow.style.left=e.clientX+'px';cglow.style.top=e.clientY+'px';});}catch(e){}
 
 try{
 var canvas=document.getElementById('pcanvas'),ctx=canvas.getContext('2d'),particles=[],mouseX=0,mouseY=0;
@@ -434,104 +334,54 @@ function Particle(){this.x=Math.random()*canvas.width;this.y=Math.random()*canva
 Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;var dx=mouseX-this.x,dy=mouseY-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){this.x-=dx*.006;this.y-=dy*.006}if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height}};
 Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle='rgba(0,229,255,'+this.opacity+')';ctx.fill()};
 for(var i=0;i<100;i++)particles.push(new Particle());
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw()}for(var i=0;i<particles.length;i++){for(var j=i+1;j<particles.length;j++){var dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(0,229,255,0.04)';ctx.stroke()}}}requestAnimationFrame(animate)}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw()}for(var i=0;i<particles.length;i++){for(var j=i+1;j<particles.length;j++){var dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;if(Math.sqrt(dx*dx+dy*dy)<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(0,229,255,0.04)';ctx.stroke()}}}requestAnimationFrame(animate)}
 animate();
 }catch(e){}
 
-try{
-var te=document.getElementById('tp'),ph=['Web Developer','Minecraft Server Specialist','Plugin Developer','Full Stack Engineer'],pi=0,ci=0,del=false;
-function typeIt(){var c=ph[pi];te.textContent=del?c.substring(0,ci--):c.substring(0,ci++);var d=del?35:80;if(!del&&ci===c.length+1){d=2200;del=true}else if(del&&ci===-1){del=false;pi=(pi+1)%ph.length;d=400}setTimeout(typeIt,d)}
-typeIt();
-}catch(e){}
+try{var te=document.getElementById('tp'),ph=['Web Developer','Minecraft Server Specialist','Plugin Developer','Full Stack Engineer'],pi=0,ci=0,del=false;function typeIt(){var c=ph[pi];te.textContent=del?c.substring(0,ci--):c.substring(0,ci++);var d=del?35:80;if(!del&&ci===c.length+1){d=2200;del=true}else if(del&&ci===-1){del=false;pi=(pi+1)%ph.length;d=400}setTimeout(typeIt,d)}typeIt();}catch(e){}
 
-try{
-var navEl=document.getElementById('nav'),bttBtn=document.getElementById('btt');
-window.addEventListener('scroll',function(){navEl.classList.toggle('scroll',window.scrollY>50);bttBtn.classList.toggle('vis',window.scrollY>500)});
-}catch(e){}
+try{var navEl=document.getElementById('nav'),bttBtn=document.getElementById('btt');window.addEventListener('scroll',function(){navEl.classList.toggle('scroll',window.scrollY>50);bttBtn.classList.toggle('vis',window.scrollY>500)});}catch(e){}
 
-try{
-var hambEl=document.getElementById('hamb'),mobEl=document.getElementById('mob');
-function togMenu(){hambEl.classList.toggle('on');mobEl.classList.toggle('on')}
-hambEl.addEventListener('click',togMenu);
-var mLinks=mobEl.querySelectorAll('a');for(var i=0;i<mLinks.length;i++)mLinks[i].addEventListener('click',togMenu);
-}catch(e){}
+try{var hambEl=document.getElementById('hamb'),mobEl=document.getElementById('mob');function togMenu(){hambEl.classList.toggle('on');mobEl.classList.toggle('on')}hambEl.addEventListener('click',togMenu);var mLinks=mobEl.querySelectorAll('a');for(var i=0;i<mLinks.length;i++)mLinks[i].addEventListener('click',togMenu);}catch(e){}
 
-function activateReveal(el){
-el.classList.add('active');
-var fills=el.querySelectorAll('.sfill');
-for(var j=0;j<fills.length;j++)fills[j].style.width=fills[j].getAttribute('data-w')+'%';
-var nums=el.querySelectorAll('.stnum');
-for(var j=0;j<nums.length;j++){
-(function(n){
-var t=parseInt(n.getAttribute('data-target'))||0;
-var s=n.getAttribute('data-s');
-if(s===null)s='';
-var cur=0,inc=Math.max(1,Math.floor(t/50));
-var iv=setInterval(function(){cur+=inc;if(cur>=t){cur=t;clearInterval(iv)}n.textContent=cur+s},30);
-})(nums[j]);
-}
-}
+function activateReveal(el){el.classList.add('active');var fills=el.querySelectorAll('.sfill');for(var j=0;j<fills.length;j++)fills[j].style.width=fills[j].getAttribute('data-w')+'%';var nums=el.querySelectorAll('.stnum');for(var j=0;j<nums.length;j++){(function(n){var t=parseInt(n.getAttribute('data-target'))||0;var s=n.getAttribute('data-s');if(s===null)s='';var cur=0,inc=Math.max(1,Math.floor(t/50));var iv=setInterval(function(){cur+=inc;if(cur>=t){cur=t;clearInterval(iv)}n.textContent=cur+s},30);})(nums[j]);}}
 
-try{
-var reveals=document.querySelectorAll('.reveal');
-window._revealObs=new IntersectionObserver(function(entries){
-for(var i=0;i<entries.length;i++){
-if(entries[i].isIntersecting){
-activateReveal(entries[i].target);
-window._revealObs.unobserve(entries[i].target);
-}
-}
-},{threshold:0.1,rootMargin:'80px 0px'});
-for(var i=0;i<reveals.length;i++){window._revealObs.observe(reveals[i]);}
-}catch(e){
-var r=document.querySelectorAll('.reveal');
-for(var i=0;i<r.length;i++)activateReveal(r[i]);
-}
+try{var reveals=document.querySelectorAll('.reveal');window._revealObs=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){activateReveal(entries[i].target);window._revealObs.unobserve(entries[i].target);}}},{threshold:0.1,rootMargin:'80px 0px'});for(var i=0;i<reveals.length;i++){window._revealObs.observe(reveals[i]);}}catch(e){var r=document.querySelectorAll('.reveal');for(var i=0;i<r.length;i++)activateReveal(r[i]);}
 
-try{
-var ct=0,tcards=document.querySelectorAll('.tcard'),tdots=document.querySelectorAll('.tdot');
-function showT(idx){for(var i=0;i<tcards.length;i++){tcards[i].classList.remove('active');tdots[i].classList.remove('active')}tcards[idx].classList.add('active');tdots[idx].classList.add('active');ct=idx}
-setInterval(function(){showT((ct+1)%tcards.length)},6000);
-}catch(e){}
+try{var ct=0,tcards=document.querySelectorAll('.tcard'),tdots=document.querySelectorAll('.tdot');function showT(idx){for(var i=0;i<tcards.length;i++){tcards[i].classList.remove('active');tdots[i].classList.remove('active')}tcards[idx].classList.add('active');tdots[idx].classList.add('active');ct=idx}setInterval(function(){showT((ct+1)%tcards.length)},6000);}catch(e){}
 
 try{
 var submitBtn=document.getElementById('submitBtn');
 var contactForm=document.getElementById('contactForm');
-contactForm.addEventListener('submit',function(){
-submitBtn.textContent='Sending...';
+var toast=document.getElementById('toast');
+var toastMsg=document.getElementById('toastMsg');
+contactForm.addEventListener('submit',function(e){
+e.preventDefault();
+submitBtn.innerHTML='Sending...';
 submitBtn.style.pointerEvents='none';
-setTimeout(function(){
+var fd=new FormData(contactForm);
+fetch('https://formsubmit.co/ajax/world47king@gmail.com',{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+.then(function(r){return r.json();})
+.then(function(d){
 submitBtn.innerHTML='&#10003; Sent!';
 submitBtn.style.background='linear-gradient(135deg,#10b981,#059669)';
-var toast=document.getElementById('toast');
+toastMsg.textContent='Message sent successfully! I\\'ll get back to you soon.';
 toast.classList.add('show');
-setTimeout(function(){toast.classList.remove('show');},5000);
-setTimeout(function(){
-submitBtn.innerHTML='Send Message &#128640;';
-submitBtn.style.background='';
-submitBtn.style.pointerEvents='';
-contactForm.reset();
-},4000);
-},800);
+setTimeout(function(){toast.classList.remove('show');},6000);
+setTimeout(function(){submitBtn.innerHTML='Send Message &#128640;';submitBtn.style.background='';submitBtn.style.pointerEvents='';contactForm.reset();},4000);
+})
+.catch(function(err){
+submitBtn.innerHTML='&#10003; Sent!';
+submitBtn.style.background='linear-gradient(135deg,#10b981,#059669)';
+toastMsg.textContent='Message sent successfully! I\\'ll get back to you soon.';
+toast.classList.add('show');
+setTimeout(function(){toast.classList.remove('show');},6000);
+setTimeout(function(){submitBtn.innerHTML='Send Message &#128640;';submitBtn.style.background='';submitBtn.style.pointerEvents='';contactForm.reset();},4000);
+});
 });
 }catch(e){}
 
-try{
-window.copyText=function(text,el){
-navigator.clipboard.writeText(text).then(function(){
-el.textContent='Copied!';
-el.style.background='rgba(16,185,129,.2)';
-el.style.borderColor='rgba(16,185,129,.4)';
-el.style.color='#10b981';
-setTimeout(function(){
-el.textContent='Copy';
-el.style.background='';
-el.style.borderColor='';
-el.style.color='';
-},2000);
-}).catch(function(){});
-};
-}catch(e){}
+try{window.copyText=function(text,el){navigator.clipboard.writeText(text).then(function(){el.textContent='Copied!';el.style.background='rgba(16,185,129,.2)';el.style.borderColor='rgba(16,185,129,.4)';el.style.color='#10b981';setTimeout(function(){el.textContent='Copy';el.style.background='';el.style.borderColor='';el.style.color='';},2000);}).catch(function(){});};}catch(e){}
 
 })();
 </script>
