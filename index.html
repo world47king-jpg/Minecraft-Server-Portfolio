@@ -19,7 +19,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:1rem 2rem;background:rgba(6,9,15,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:all .3s}
 nav.scroll{padding:.6rem 2rem;background:rgba(6,9,15,.95)}
 .nbar{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.nlogo{font-size:1.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nlogo{font-size:1.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
 .nlinks{display:flex;gap:2.5rem;list-style:none}
 .nlinks a{color:var(--txt2);text-decoration:none;font-size:.9rem;font-weight:500;transition:.3s;position:relative}
 .nlinks a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--grad);transition:width .3s}
@@ -101,7 +101,7 @@ section{padding:7rem 2rem;max-width:1300px;margin:0 auto}
 .tdot{width:10px;height:10px;border-radius:50%;background:transparent;border:2px solid var(--cyan);cursor:pointer;transition:.3s}
 .tdot.active{background:var(--cyan)}
 
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:950px;margin:0 auto}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:950px;margin:0 auto}
 .cinfo{display:flex;flex-direction:column;gap:1.2rem}
 .citem{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:var(--card);border-radius:14px;border:1px solid var(--border);transition:.3s}
 .citem:hover{border-color:var(--cyan);transform:translateX(8px)}
@@ -109,13 +109,14 @@ section{padding:7rem 2rem;max-width:1300px;margin:0 auto}
 .clab{color:var(--txt3);font-size:.8rem}
 .cval{font-weight:600;font-size:.95rem}
 .cform{display:flex;flex-direction:column;gap:1rem}
-.finput{width:100%;padding:1rem 1.2rem;background:var(--card);border:2px solid var(--border);border-radius:12px;color:var(--txt);font-size:1rem;transition:.3s;outline:none}
-.finput:focus{border-color:var(--cyan);box-shadow:var(--glow)}
+.finput{width:100%;padding:1rem 1.2rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:12px;color:var(--txt);font-size:1rem;transition:.3s;outline:none}
+.finput::placeholder{color:var(--txt3)}
+.finput:focus{border-color:var(--cyan);box-shadow:0 0 15px rgba(0,229,255,.15);background:rgba(255,255,255,.08)}
 .ftext{min-height:140px;resize:vertical;font-family:inherit}
 
 footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem;text-align:center;border-top:1px solid var(--border)}
 .fcontent{max-width:1300px;margin:0 auto}
-.flogo{font-size:1.5rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.flogo{font-size:1.5rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;letter-spacing:2px}
 .flinks{display:flex;gap:2rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap}
 .flinks a{color:var(--txt2);text-decoration:none;transition:.3s}
 .flinks a:hover{color:var(--cyan)}
@@ -128,21 +129,18 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
 .reveal{opacity:0;transform:translateY(40px);transition:all .9s cubic-bezier(.4,0,.2,1)}
 .reveal.active{opacity:1;transform:translateY(0)}
 
-@media(max-width:900px){.nlinks{display:none}.hamb{display:flex}.stats{grid-template-columns:repeat(2,1fr)}.sgrid,.dgrid,.cgrid{grid-template-columns:1fr}.hname{font-size:clamp(3rem,15vw,6rem)}}
+@media(max-width:900px){.nlinks{display:none}.hamb{display:flex}.stats{grid-template-columns:repeat(2,1fr)}.sgrid,.dgrid{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}.hname{font-size:clamp(3rem,15vw,6rem)}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div id="loader">
-  <div class="ring"></div>
-  <div class="ltext">Loading</div>
-</div>
+<div id="loader"><div class="ring"></div><div class="ltext">Loading</div></div>
 
 <nav id="nav">
   <div class="nbar">
-    <div class="nlogo">&lt;JAY/&gt;</div>
+    <div class="nlogo">JAY</div>
     <ul class="nlinks">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -259,25 +257,37 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
 <section id="contact">
   <h2 class="stitle reveal">Get In Touch</h2>
   <p class="ssub reveal">Have a project? Let's build something great together.</p>
-  <div class="cgrid">
+  <div class="contact-wrap">
     <div class="cinfo reveal">
-      <div class="citem"><div class="cicon">&#x1F4AC;</div><div><div class="clab">Discord</div><div class="cval">underworld_4</div></div></div>
-      <div class="citem"><div class="cicon">&#x1F419;</div><div><div class="clab">GitHub</div><div class="cval">world47king-jpg</div></div></div>
-      <div class="citem"><div class="cicon">&#x1F4E7;</div><div><div class="clab">Email</div><div class="cval">world47king@gmail.com</div></div></div>
-      <div class="citem"><div class="cicon">&#x1F310;</div><div><div class="clab">Portfolio</div><div class="cval">BuiltByBit: itsbnl</div></div></div>
+      <div class="citem">
+        <div class="cicon">&#x1F4AC;</div>
+        <div><div class="clab">Discord</div><div class="cval">underworld_4</div></div>
+      </div>
+      <div class="citem">
+        <div class="cicon">&#x1F419;</div>
+        <div><div class="clab">GitHub</div><div class="cval">world47king-jpg</div></div>
+      </div>
+      <div class="citem">
+        <div class="cicon">&#x1F4E7;</div>
+        <div><div class="clab">Email</div><div class="cval">world47king@gmail.com</div></div>
+      </div>
+      <div class="citem">
+        <div class="cicon">&#x1F310;</div>
+        <div><div class="clab">BuiltByBit</div><div class="cval">itsbnl</div></div>
+      </div>
     </div>
-    <form class="cform reveal" onsubmit="event.preventDefault();alert('Message sent! (Demo)')">
-      <input class="finput" type="text" placeholder="Your Name" required>
-      <input class="finput" type="email" placeholder="Your Email" required>
-      <textarea class="finput ftext" placeholder="Your Message" required></textarea>
-      <button class="btn btn1" style="width:100%;justify-content:center">Send Message</button>
+    <form class="cform reveal" id="contactForm">
+      <input class="finput" type="text" name="name" placeholder="Your Name" required>
+      <input class="finput" type="email" name="email" placeholder="Your Email" required>
+      <textarea class="finput ftext" name="message" placeholder="Tell me about your project..." required></textarea>
+      <button type="submit" class="btn btn1" style="width:100%;justify-content:center">Send Message</button>
     </form>
   </div>
 </section>
 
 <footer>
   <div class="fcontent">
-    <div class="flogo">&lt;JAY/&gt;</div>
+    <div class="flogo">JAY</div>
     <div class="flinks">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
@@ -294,29 +304,21 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
 <script>
 try {
 
-// Loader
 setTimeout(function() {
-  var loader = document.getElementById('loader');
-  if (loader) loader.classList.add('hide');
+  var l = document.getElementById('loader');
+  if (l) l.classList.add('hide');
 }, 1500);
 
 // Particles
 var canvas = document.getElementById('pcanvas');
 var ctx = canvas.getContext('2d');
 var particles = [];
-var mouseX = 0;
-var mouseY = 0;
+var mouseX = 0, mouseY = 0;
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-document.addEventListener('mousemove', function(e) {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
 
 function Particle() {
   this.x = Math.random() * canvas.width;
@@ -326,51 +328,32 @@ function Particle() {
   this.vy = (Math.random() - 0.5) * 0.4;
   this.opacity = Math.random() * 0.5 + 0.1;
 }
-
 Particle.prototype.update = function() {
-  this.x += this.vx;
-  this.y += this.vy;
-  var dx = mouseX - this.x;
-  var dy = mouseY - this.y;
-  var dist = Math.sqrt(dx * dx + dy * dy);
-  if (dist < 160) {
-    this.x -= dx * 0.008;
-    this.y -= dy * 0.008;
-  }
+  this.x += this.vx; this.y += this.vy;
+  var dx = mouseX - this.x, dy = mouseY - this.y, d = Math.sqrt(dx*dx+dy*dy);
+  if (d < 160) { this.x -= dx*0.008; this.y -= dy*0.008; }
   if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
   }
 };
-
 Particle.prototype.draw = function() {
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgba(0, 229, 255, ' + this.opacity + ')';
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(0,229,255,' + this.opacity + ')'; ctx.fill();
 };
 
-for (var i = 0; i < 120; i++) {
-  particles.push(new Particle());
-}
+for (var i = 0; i < 120; i++) particles.push(new Particle());
 
 function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (var i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); }
   for (var i = 0; i < particles.length; i++) {
-    particles[i].update();
-    particles[i].draw();
-  }
-  for (var i = 0; i < particles.length; i++) {
-    for (var j = i + 1; j < particles.length; j++) {
-      var dx = particles[i].x - particles[j].x;
-      var dy = particles[i].y - particles[j].y;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 130) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
+    for (var j = i+1; j < particles.length; j++) {
+      var dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+      if (Math.sqrt(dx*dx+dy*dy) < 130) {
+        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = 'rgba(0, 229, 255, 0.06)';
-        ctx.stroke();
+        ctx.strokeStyle = 'rgba(0,229,255,0.06)'; ctx.stroke();
       }
     }
   }
@@ -378,127 +361,91 @@ function animateParticles() {
 }
 animateParticles();
 
-// Typing Effect
-var typingEl = document.getElementById('tp');
-var phrases = ['Web Developer', 'Minecraft Server Specialist', 'Plugin Developer', 'Full Stack Engineer'];
-var phraseIdx = 0;
-var charIdx = 0;
-var isDeleting = false;
-
-function typeEffect() {
-  var current = phrases[phraseIdx];
-  if (isDeleting) {
-    typingEl.textContent = current.substring(0, charIdx);
-    charIdx--;
-  } else {
-    typingEl.textContent = current.substring(0, charIdx);
-    charIdx++;
-  }
-  var delay = isDeleting ? 40 : 90;
-  if (!isDeleting && charIdx === current.length + 1) {
-    delay = 2000;
-    isDeleting = true;
-  } else if (isDeleting && charIdx === -1) {
-    isDeleting = false;
-    phraseIdx = (phraseIdx + 1) % phrases.length;
-    delay = 400;
-  }
-  setTimeout(typeEffect, delay);
+// Typing
+var te = document.getElementById('tp');
+var ph = ['Web Developer', 'Minecraft Server Specialist', 'Plugin Developer', 'Full Stack Engineer'];
+var pi = 0, ci = 0, del = false;
+function typeIt() {
+  var c = ph[pi];
+  te.textContent = del ? c.substring(0, ci--) : c.substring(0, ci++);
+  var d = del ? 40 : 90;
+  if (!del && ci === c.length + 1) { d = 2000; del = true; }
+  else if (del && ci === -1) { del = false; pi = (pi + 1) % ph.length; d = 400; }
+  setTimeout(typeIt, d);
 }
-typeEffect();
+typeIt();
 
-// Nav scroll
+// Nav
 var navEl = document.getElementById('nav');
 var bttBtn = document.getElementById('btt');
 window.addEventListener('scroll', function() {
-  if (window.scrollY > 50) {
-    navEl.classList.add('scroll');
-  } else {
-    navEl.classList.remove('scroll');
-  }
-  if (window.scrollY > 500) {
-    bttBtn.classList.add('vis');
-  } else {
-    bttBtn.classList.remove('vis');
-  }
+  navEl.classList.toggle('scroll', window.scrollY > 50);
+  bttBtn.classList.toggle('vis', window.scrollY > 500);
 });
 
 // Mobile menu
 var hambEl = document.getElementById('hamb');
 var mobEl = document.getElementById('mob');
-var menuLinks = mobEl.querySelectorAll('a');
-
-function togMenu() {
-  hambEl.classList.toggle('on');
-  mobEl.classList.toggle('on');
-}
+function togMenu() { hambEl.classList.toggle('on'); mobEl.classList.toggle('on'); }
 hambEl.addEventListener('click', togMenu);
-for (var i = 0; i < menuLinks.length; i++) {
-  menuLinks[i].addEventListener('click', togMenu);
-}
+var mLinks = mobEl.querySelectorAll('a');
+for (var i = 0; i < mLinks.length; i++) mLinks[i].addEventListener('click', togMenu);
 
-// Scroll reveal + animations
-var revealEls = document.querySelectorAll('.reveal');
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-
-      // Animate skill bars
-      var fills = entry.target.querySelectorAll('.sfill');
-      for (var i = 0; i < fills.length; i++) {
-        fills[i].style.width = fills[i].getAttribute('data-w') + '%';
-      }
-
-      // Animate counters
-      var nums = entry.target.querySelectorAll('.stnum');
-      for (var i = 0; i < nums.length; i++) {
-        (function(num) {
-          var target = parseInt(num.getAttribute('data-target'));
-          var suffix = num.getAttribute('data-s') || '+';
-          var current = 0;
-          var increment = target / 50;
+// Scroll reveal
+var obs = new IntersectionObserver(function(entries) {
+  for (var i = 0; i < entries.length; i++) {
+    if (entries[i].isIntersecting) {
+      var el = entries[i].target;
+      el.classList.add('active');
+      var fills = el.querySelectorAll('.sfill');
+      for (var j = 0; j < fills.length; j++) fills[j].style.width = fills[j].getAttribute('data-w') + '%';
+      var nums = el.querySelectorAll('.stnum');
+      for (var j = 0; j < nums.length; j++) {
+        (function(n) {
+          var t = parseInt(n.getAttribute('data-target'));
+          var s = n.getAttribute('data-s') || '+';
+          var cur = 0, inc = t / 50;
           var iv = setInterval(function() {
-            current += increment;
-            if (current >= target) {
-              current = target;
-              clearInterval(iv);
-            }
-            num.textContent = Math.floor(current) + suffix;
+            cur += inc;
+            if (cur >= t) { cur = t; clearInterval(iv); }
+            n.textContent = Math.floor(cur) + s;
           }, 30);
-        })(nums[i]);
+        })(nums[j]);
       }
     }
-  });
+  }
 }, { threshold: 0.2 });
 
-for (var i = 0; i < revealEls.length; i++) {
-  observer.observe(revealEls[i]);
-}
+var reveals = document.querySelectorAll('.reveal');
+for (var i = 0; i < reveals.length; i++) obs.observe(reveals[i]);
 
 // Testimonials
-var currentTestimonial = 0;
+var ct = 0;
 var tcards = document.querySelectorAll('.tcard');
 var tdots = document.querySelectorAll('.tdot');
-
-function showT(index) {
-  for (var i = 0; i < tcards.length; i++) {
-    tcards[i].classList.remove('active');
-    tdots[i].classList.remove('active');
-  }
-  tcards[index].classList.add('active');
-  tdots[index].classList.add('active');
-  currentTestimonial = index;
+function showT(idx) {
+  for (var i = 0; i < tcards.length; i++) { tcards[i].classList.remove('active'); tdots[i].classList.remove('active'); }
+  tcards[idx].classList.add('active'); tdots[idx].classList.add('active'); ct = idx;
 }
+setInterval(function() { showT((ct + 1) % tcards.length); }, 5000);
 
-setInterval(function() {
-  showT((currentTestimonial + 1) % tcards.length);
-}, 5000);
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = this.querySelector('button');
+  var orig = btn.textContent;
+  btn.textContent = 'Sent!';
+  btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+  setTimeout(function() {
+    btn.textContent = orig;
+    btn.style.background = '';
+  }, 2500);
+  this.reset();
+});
 
 } catch(e) {
-  // Failsafe: hide loader even if JS errors
-  var loader = document.getElementById('loader');
-  if (loader) loader.classList.add('hide');
+  var l = document.getElementById('loader');
+  if (l) l.classList.add('hide');
 }
 </script>
 </body>
