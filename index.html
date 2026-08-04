@@ -181,7 +181,7 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
   <h2 class="stitle reveal">About Me</h2>
   <p class="ssub reveal">Crafting digital experiences and building robust server infrastructure with passion and precision.</p>
   <div class="stats">
-    <div class="stcard reveal"><div class="stnum" data-target="50">0</div><div class="stlab">Projects Completed</div></div>
+    <div class="stcard reveal"><div class="stnum" data-target="50" data-s="">0</div><div class="stlab">Projects Completed</div></div>
     <div class="stcard reveal"><div class="stnum" data-target="100" data-s="%">0</div><div class="stlab">Client Satisfaction</div></div>
     <div class="stcard reveal"><div class="stnum" data-target="24" data-s="/7">0</div><div class="stlab">Availability</div></div>
     <div class="stcard reveal"><div class="stnum" data-target="5" data-s="+">0</div><div class="stlab">Years Experience</div></div>
@@ -304,44 +304,83 @@ footer{background:linear-gradient(135deg,var(--bg2),var(--bg));padding:3rem 2rem
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <script>
-try {
-setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('hide');},1500);
+(function(){
+try{setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('hide');},1500)}catch(e){}
 
+try{
 var canvas=document.getElementById('pcanvas'),ctx=canvas.getContext('2d'),particles=[],mouseX=0,mouseY=0;
 function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
 resizeCanvas();window.addEventListener('resize',resizeCanvas);
 document.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY});
-
 function Particle(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+.5;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.opacity=Math.random()*.5+.1}
 Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;var dx=mouseX-this.x,dy=mouseY-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){this.x-=dx*.008;this.y-=dy*.008}if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height}};
 Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle='rgba(0,229,255,'+this.opacity+')';ctx.fill()};
 for(var i=0;i<120;i++)particles.push(new Particle());
-
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw()}for(var i=0;i<particles.length;i++){for(var j=i+1;j<particles.length;j++){var dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;if(Math.sqrt(dx*dx+dy*dy)<130){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(0,229,255,0.06)';ctx.stroke()}}}requestAnimationFrame(animate)}
 animate();
+}catch(e){}
 
+try{
 var te=document.getElementById('tp'),ph=['Web Developer','Minecraft Server Specialist','Plugin Developer','Full Stack Engineer'],pi=0,ci=0,del=false;
 function typeIt(){var c=ph[pi];te.textContent=del?c.substring(0,ci--):c.substring(0,ci++);var d=del?40:90;if(!del&&ci===c.length+1){d=2000;del=true}else if(del&&ci===-1){del=false;pi=(pi+1)%ph.length;d=400}setTimeout(typeIt,d)}
 typeIt();
+}catch(e){}
 
+try{
 var navEl=document.getElementById('nav'),bttBtn=document.getElementById('btt');
 window.addEventListener('scroll',function(){navEl.classList.toggle('scroll',window.scrollY>50);bttBtn.classList.toggle('vis',window.scrollY>500)});
+}catch(e){}
 
+try{
 var hambEl=document.getElementById('hamb'),mobEl=document.getElementById('mob');
 function togMenu(){hambEl.classList.toggle('on');mobEl.classList.toggle('on')}
 hambEl.addEventListener('click',togMenu);
 var mLinks=mobEl.querySelectorAll('a');for(var i=0;i<mLinks.length;i++)mLinks[i].addEventListener('click',togMenu);
+}catch(e){}
 
-var obs=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){var el=entries[i].target;el.classList.add('active');var fills=el.querySelectorAll('.sfill');for(var j=0;j<fills.length;j++)fills[j].style.width=fills[j].getAttribute('data-w')+'%';var nums=el.querySelectorAll('.stnum');for(var j=0;j<nums.length;j++){(function(n){var t=parseInt(n.getAttribute('data-target')),s=n.getAttribute('data-s')||'+',cur=0,inc=t/50;var iv=setInterval(function(){cur+=inc;if(cur>=t){cur=t;clearInterval(iv)}n.textContent=Math.floor(cur)+s},30)})(nums[j])}}}},{threshold:0.2});
-var reveals=document.querySelectorAll('.reveal');for(var i=0;i<reveals.length;i++)obs.observe(reveils[i]);
+function activateReveal(el){
+el.classList.add('active');
+var fills=el.querySelectorAll('.sfill');
+for(var j=0;j<fills.length;j++)fills[j].style.width=fills[j].getAttribute('data-w')+'%';
+var nums=el.querySelectorAll('.stnum');
+for(var j=0;j<nums.length;j++){
+(function(n){
+var t=parseInt(n.getAttribute('data-target'))||0;
+var s=n.getAttribute('data-s');
+if(s===null)s='';
+var cur=0,inc=Math.max(1,Math.floor(t/50));
+var iv=setInterval(function(){cur+=inc;if(cur>=t){cur=t;clearInterval(iv)}n.textContent=cur+s},30);
+})(nums[j]);
+}
+}
 
+try{
+var reveals=document.querySelectorAll('.reveal');
+window._revealObs=new IntersectionObserver(function(entries){
+for(var i=0;i<entries.length;i++){
+if(entries[i].isIntersecting){
+activateReveal(entries[i].target);
+window._revealObs.unobserve(entries[i].target);
+}
+}
+},{threshold:0.1,rootMargin:'50px 0px'});
+for(var i=0;i<reveals.length;i++){window._revealObs.observe(reveals[i]);}
+}catch(e){
+var r=document.querySelectorAll('.reveal');
+for(var i=0;i<r.length;i++)activateReveal(r[i]);
+}
+
+try{
 var ct=0,tcards=document.querySelectorAll('.tcard'),tdots=document.querySelectorAll('.tdot');
 function showT(idx){for(var i=0;i<tcards.length;i++){tcards[i].classList.remove('active');tdots[i].classList.remove('active')}tcards[idx].classList.add('active');tdots[idx].classList.add('active');ct=idx}
 setInterval(function(){showT((ct+1)%tcards.length)},5000);
+}catch(e){}
 
+try{
 document.getElementById('contactForm').addEventListener('submit',function(){var btn=this.querySelector('button[type=submit]');btn.textContent='Sending...';setTimeout(function(){btn.textContent='Sent!';btn.style.background='linear-gradient(135deg,#10b981,#059669)';setTimeout(function(){btn.textContent='Send Message';btn.style.background=''},3000)},500)});
+}catch(e){}
 
-}catch(e){var l=document.getElementById('loader');if(l)l.classList.add('hide')}
+})();
 </script>
 </body>
 </html>
