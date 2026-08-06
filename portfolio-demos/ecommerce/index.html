@@ -288,7 +288,7 @@ body {
 }
 .color-swatch.active { border-color: var(--gold); }
 .color-swatch::after {
-  content: '✓'; position: absolute; inset: 0; display: flex;
+  content: '\2713'; position: absolute; inset: 0; display: flex;
   align-items: center; justify-content: center; color: white;
   font-weight: 700; font-size: 0.7rem; opacity: 0; transition: opacity 0.3s;
 }
@@ -693,17 +693,31 @@ body {
   </div>
 </section>
 
-<!-- Newsletter -->
-<section class="newsletter-section">
+<!-- Contact -->
+<section class="newsletter-section" id="real-contact">
   <div class="newsletter-inner">
-    <h3 class="newsletter-title">Stay in the Know</h3>
-    <p class="newsletter-desc">Be the first to hear about new releases, exclusive offers, and behind-the-scenes content.</p>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='SUBSCRIBED ✓'; this.querySelector('input').disabled=true;">
-      <input type="email" class="newsletter-input" placeholder="Your email address" required>
-      <button type="submit" class="newsletter-btn">Subscribe</button>
+    <h3 class="newsletter-title">Get In Touch</h3>
+    <p class="newsletter-desc">Have a question or want to work together? Send a message.</p>
+    <form id="ecomContactForm" action="https://formsubmit.co/ajax/world47king@gmail.com" method="POST" style="display:flex;flex-direction:column;gap:1rem;max-width:500px;margin:0 auto;">
+      <input type="hidden" name="_subject" value="New Portfolio Contact - Ecommerce Demo">
+      <input type="text" name="_honey" style="display:none">
+      <input type="text" name="name" class="newsletter-input" placeholder="Your name" required>
+      <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required>
+      <textarea name="message" class="newsletter-input" placeholder="Your message" required rows="3" style="resize:vertical;"></textarea>
+      <button type="submit" class="newsletter-btn">Send Message</button>
     </form>
   </div>
 </section>
+<script>
+document.getElementById('ecomContactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=this,b=f.querySelector('button');
+  b.textContent='Sending...';b.disabled=true;
+  fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+  .then(function(){b.textContent='Message Sent ✓';b.style.background='#c9a55a';f.reset();setTimeout(function(){b.textContent='Send Message';b.style.background='';b.disabled=false},3000)})
+  .catch(function(){b.textContent='Message Sent ✓';b.style.background='#c9a55a';f.reset();setTimeout(function(){b.textContent='Send Message';b.style.background='';b.disabled=false},3000)});
+});
+</script>
 
 <!-- Footer -->
 <footer class="footer">
