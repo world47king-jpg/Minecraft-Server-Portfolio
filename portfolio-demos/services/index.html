@@ -20,13 +20,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-menu a:hover{color:var(--text)}
 .nav-cta{padding:0.6rem 1.5rem;background:var(--accent);border:none;border-radius:8px;color:white;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.3s}
 .nav-cta:hover{box-shadow:0 8px 25px rgba(108,92,231,0.4);transform:translateY(-2px)}
-
 .hero{padding:10rem 2.5rem 5rem;text-align:center}
 .hero-tag{display:inline-block;padding:0.4rem 1rem;background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.15);border-radius:50px;font-size:0.75rem;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem;font-weight:500}
 .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;margin-bottom:1rem}
 .hero h1 .gradient{background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero p{color:var(--dim);max-width:600px;margin:0 auto;font-size:1.1rem}
-
 .services{max-width:1200px;margin:0 auto;padding:3rem 2.5rem 7rem}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
 .scard{padding:2.5rem;background:var(--card);border:1px solid var(--border);border-radius:16px;transition:all 0.4s;position:relative;overflow:hidden}
@@ -42,147 +40,95 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .sprice{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:var(--accent2);margin-bottom:1.5rem}
 .sbtn{display:inline-block;padding:0.7rem 1.5rem;background:var(--accent);border:none;border-radius:8px;color:white;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.3s;text-decoration:none}
 .sbtn:hover{box-shadow:0 8px 25px rgba(108,92,231,0.4);transform:translateY(-2px)}
-
 .cta{padding:5rem 2.5rem;text-align:center;border-top:1px solid var(--border)}
 .cta h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin-bottom:1rem}
 .cta p{color:var(--dim);margin-bottom:2rem}
-
 footer{padding:3rem 2.5rem;border-top:1px solid var(--border);background:var(--bg2);text-align:center}
 footer .flogo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:0.5rem}
 footer .flogo span{color:var(--accent)}
 footer p{color:var(--muted);font-size:0.85rem}
-
 @media(max-width:768px){.nav-menu{display:none}.sgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="/Minecraft-Server-Portfolio/" class="nav-brand">NeonForge</a>
+    <a href="../../" class="nav-brand">NeonForge</a>
     <ul class="nav-menu">
-      <li><a href="/Minecraft-Server-Portfolio/#services">Services</a></li>
-      <li><a href="/Minecraft-Server-Portfolio/#demos">Work</a></li>
-      <li><a href="/Minecraft-Server-Portfolio/#testi">Reviews</a></li>
-      <li><a href="/Minecraft-Server-Portfolio/#contact">Contact</a></li>
+      <li><a href="../../#services">Services</a></li>
+      <li><a href="../../#demos">Work</a></li>
+      <li><a href="../../#testi">Reviews</a></li>
+      <li><a href="../../#contact">Contact</a></li>
     </ul>
-    <button class="nav-cta" onclick="location.href='/Minecraft-Server-Portfolio/#contact'">Hire Me</button>
+    <button class="nav-cta" onclick="location.href='../../#contact'">Hire Me</button>
   </div>
 </nav>
-
 <section class="hero">
   <div class="hero-tag">What I Offer</div>
   <h1>Professional <span class="gradient">Services</span></h1>
   <p>High-quality web development and Minecraft server solutions tailored to your needs.</p>
 </section>
-
 <section class="services">
   <div class="sgrid">
-
     <div class="scard">
       <div class="sicon">🌐</div>
       <h3>Web Development</h3>
       <p>Custom websites and web applications built with modern technologies. From landing pages to complex platforms, I deliver exceptional digital experiences.</p>
-      <ul class="slist">
-        <li>Responsive design for all devices</li>
-        <li>Modern HTML5, CSS3, JavaScript</li>
-        <li>React, Vue, or vanilla JS</li>
-        <li>SEO-optimized structure</li>
-        <li>Fast load times & performance</li>
-      </ul>
+      <ul class="slist"><li>Responsive design for all devices</li><li>Modern HTML5, CSS3, JavaScript</li><li>React, Vue, or vanilla JS</li><li>SEO-optimized structure</li><li>Fast load times & performance</li></ul>
       <div class="sprice">From $200</div>
-      <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Get a Quote</a>
+      <a href="../../#contact" class="sbtn">Get a Quote</a>
     </div>
-
     <div class="scard">
       <div class="sicon">⛏️</div>
       <h3>Minecraft Servers</h3>
       <p>Complete server setup, configuration, and optimization. Custom plugins, network management, and performance tuning for the best gaming experience.</p>
-      <ul class="slist">
-        <li>Server setup & configuration</li>
-        <li>Custom plugin development</li>
-        <li>Performance optimization</li>
-        <li>Network management</li>
-        <li>Anti-cheat & security</li>
-      </ul>
+      <ul class="slist"><li>Server setup & configuration</li><li>Custom plugin development</li><li>Performance optimization</li><li>Network management</li><li>Anti-cheat & security</li></ul>
       <div class="sprice">From $50</div>
-      <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Get a Quote</a>
+      <a href="../../#contact" class="sbtn">Get a Quote</a>
     </div>
-
     <div class="scard">
       <div class="sicon">🎨</div>
       <h3>UI/UX Design</h3>
       <p>Beautiful, intuitive interfaces that users love. I focus on creating seamless experiences that combine aesthetics with functionality.</p>
-      <ul class="slist">
-        <li>User research & wireframing</li>
-        <li>Modern, clean aesthetics</li>
-        <li>Interactive prototypes</li>
-        <li>Design systems</li>
-        <li>Conversion-focused layouts</li>
-      </ul>
+      <ul class="slist"><li>User research & wireframing</li><li>Modern, clean aesthetics</li><li>Interactive prototypes</li><li>Design systems</li><li>Conversion-focused layouts</li></ul>
       <div class="sprice">From $150</div>
-      <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Get a Quote</a>
+      <a href="../../#contact" class="sbtn">Get a Quote</a>
     </div>
-
     <div class="scard">
       <div class="sicon">⚡</div>
       <h3>Performance Optimization</h3>
       <p>Speed and efficiency optimization for both websites and game servers. I ensure your digital products run at peak performance.</p>
-      <ul class="slist">
-        <li>Core Web Vitals optimization</li>
-        <li>Code splitting & lazy loading</li>
-        <li>MC server TPS optimization</li>
-        <li>Database query tuning</li>
-        <li>CDN & caching strategies</li>
-      </ul>
+      <ul class="slist"><li>Core Web Vitals optimization</li><li>Code splitting & lazy loading</li><li>MC server TPS optimization</li><li>Database query tuning</li><li>CDN & caching strategies</li></ul>
       <div class="sprice">From $100</div>
-      <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Get a Quote</a>
+      <a href="../../#contact" class="sbtn">Get a Quote</a>
     </div>
-
     <div class="scard">
       <div class="sicon">🔧</div>
       <h3>Technical Support</h3>
       <p>Ongoing maintenance and support services. I help you keep your digital products running smoothly and securely.</p>
-      <ul class="slist">
-        <li>Bug fixes & troubleshooting</li>
-        <li>Security audits & patches</li>
-        <li>Regular maintenance</li>
-        <li>Content updates</li>
-        <li>24/7 emergency support</li>
-      </ul>
+      <ul class="slist"><li>Bug fixes & troubleshooting</li><li>Security audits & patches</li><li>Regular maintenance</li><li>Content updates</li><li>24/7 emergency support</li></ul>
       <div class="sprice">From $75/mo</div>
-      <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Get a Quote</a>
+      <a href="../../#contact" class="sbtn">Get a Quote</a>
     </div>
-
     <div class="scard">
       <div class="sicon">📱</div>
       <h3>Responsive Design</h3>
       <p>Mobile-first approach ensuring your website looks and works perfectly on all devices, from desktop to smartphone.</p>
-      <ul class="slist">
-        <li>Mobile-first development</li>
-        <li>Cross-browser compatibility</li>
-        <li>Touch-friendly interfaces</li>
-        <li>Adaptive layouts</li>
-        <li>PWA capabilities</li>
-      </ul>
+      <ul class="slist"><li>Mobile-first development</li><li>Cross-browser compatibility</li><li>Touch-friendly interfaces</li><li>Adaptive layouts</li><li>PWA capabilities</li></ul>
       <div class="sprice">From $120</div>
-      <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Get a Quote</a>
+      <a href="../../#contact" class="sbtn">Get a Quote</a>
     </div>
-
   </div>
 </section>
-
 <section class="cta">
   <h2>Ready to Start?</h2>
   <p>Let's discuss your project and find the right solution.</p>
-  <a href="/Minecraft-Server-Portfolio/#contact" class="sbtn">Contact Me</a>
+  <a href="../../#contact" class="sbtn">Contact Me</a>
 </section>
-
 <footer>
   <div class="flogo">NeonForge</div>
   <p>&copy; 2026 NeonForge. Built with passion.</p>
 </footer>
-
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
 </script>
